@@ -51,13 +51,13 @@ function CountdownTimer({ minutesToCountDown }: Props) {
           }}
           until={60 * minutesToCountDown}
           size={30}
-          onFinish={() => alert("tiden är ute och du har inte stoppat tiden, sms om hjälp skickas nu till dina valda kontakter")}
+          onFinish={() => alert("Tiden är ute och du har inte stoppat tiden, sms om hjälp skickas nu till dina valda kontakter")}
           digitStyle={styles.bla}
           digitTxtStyle={{ color: "white" }}
           timeToShow={["M", "S"]}
           timeLabels={{ m: "", s: "" }}
           onPress={pauseTimer}
-          running={false}
+          running = {false}
         />
         <Text>Pausa timer</Text>
       </View>

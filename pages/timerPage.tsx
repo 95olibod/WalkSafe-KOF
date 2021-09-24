@@ -10,9 +10,9 @@ interface Props {
 }
 function TimerPage ({ onSetMinutes }: Props) {
 
-    let [timer, setTimer] = useState(42);
+    let [timer, setTimer] = useState(32);
 
-    function toggleTimerButton (){
+    const stopTimerButton = () => {
         timer = 0;
         setTimer(timer);
     }
@@ -25,9 +25,9 @@ function TimerPage ({ onSetMinutes }: Props) {
 
     return(
         <View style={styles.timer}>
-            <Text style={styles.text} onPress={toggleTimerButton}>timer</Text>
+            <Text style={styles.text} onPress={stopTimerButton}>timer</Text>
             <CountdownTimer minutesToCountDown={timer}/>
-            <StopTimerButton onStopTimer={toggleTimerButton}/>
+            <StopTimerButton onStopTimer={stopTimerButton}/>
         </View>
     );
 }
