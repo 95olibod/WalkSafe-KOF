@@ -21,7 +21,7 @@ interface Props {
 
 const CountdownTimer = ({ onSetPage }: Props) => {
     const [isTimerStart, setIsTimerStart] = useState(false);
-    const [timerDuration, setTimerDuration] = useState(5 * 1000);
+    const [timerDuration, setTimerDuration] = useState(10 * 1000);
     const [resetTimer, setResetTimer] = useState(false);
 
     //   const [isStopwatchStart, setIsStopwatchStart] = useState(false);
@@ -64,22 +64,22 @@ const CountdownTimer = ({ onSetPage }: Props) => {
                     </TouchableHighlight>
 
                     <TouchableHighlight
-                    //       onPress={() => {
-                    //           setIsTimerStart(false);
-                    //           setResetTimer(true);
-                    //       }}
+                        onPress={() => {
+                            setIsTimerStart(false);
+                            setResetTimer(true);
+                            onSetPage("endPage");
+                        }}
                     >
                         <Text
                             style={styles.buttonText}
-                            onPress={() => alert("funkar")}
-                            //     onPress={() => onSetPage("home")}
+                            //   onPress={() => onSetPage("endPage")}
                         >
                             STOPP
                         </Text>
                     </TouchableHighlight>
-                    <Button title="GÅ HEM" onPress={() => onSetPage("home")}>
+                    {/* <Button title="GÅ HEM" onPress={() => onSetPage("home")}>
                         STOPP
-                    </Button>
+                    </Button> */}
                 </View>
             </View>
         </SafeAreaView>
