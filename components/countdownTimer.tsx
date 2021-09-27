@@ -18,9 +18,9 @@ import { Stopwatch, Timer } from "react-native-stopwatch-timer";
 
 const CountdownTimer = () => {
     const [isTimerStart, setIsTimerStart] = useState(false);
-    const [timerDuration, setTimerDuration] = useState(20 * 1000);
+    const [timerDuration, setTimerDuration] = useState(5 * 1000);
     const [resetTimer, setResetTimer] = useState(false);
-    
+
     //   const [isStopwatchStart, setIsStopwatchStart] = useState(false);
     //   const [resetStopwatch, setResetStopwatch] = useState(false);
 
@@ -41,22 +41,23 @@ const CountdownTimer = () => {
                         options={options}
                         //options for the styling
                         handleFinish={() => {
-                            alert("Custom Completion Function");
+                            alert("Nu är timer färdig");
                         }}
                         //can call a function On finish of the time
                         // getTime={(time) => {
-                        //   console.log(time);
-                        // }}
-                    />
+                            //   console.log(time);
+                            // }}
+                 
+                            />
                     <TouchableHighlight
                         style={styles.margin}
                         onPress={() => {
                             setIsTimerStart(!isTimerStart);
                             setResetTimer(false);
                         }}
-                    >
+                        >
                         <Text style={[styles.buttonText, styles.margin]}>
-                            {!isTimerStart ? "START" : "STOP"}
+                            {!isTimerStart ? "START" : "PAUS"}
                         </Text>
                     </TouchableHighlight>
                     <TouchableHighlight
@@ -65,7 +66,7 @@ const CountdownTimer = () => {
                             setResetTimer(true);
                         }}
                     >
-                        <Text style={styles.buttonText}>RESET</Text>
+                        <Text style={styles.buttonText}>STOPP</Text>
                     </TouchableHighlight>
                 </View>
             </View>
@@ -97,18 +98,21 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         fontSize: 20,
-        marginTop: 10,
+        marginTop: 5,
+        padding: 15,
+        borderRadius: 5,
         color: "#FFF",
+        backgroundColor: "rgba(45, 155, 240, 0.8)",
+        // backgroundColor: "blue",
     },
     margin: {
-        marginBottom: 30,
+        marginBottom: 10,
     },
 });
 
 const options = {
     container: {
         // backgroundColor: "#2D9BF0",
-        // backgroundColor: rgb(45,155,240,0.8),
         backgroundColor: "rgba(45, 155, 240, 0.8)",
         padding: 5,
         borderRadius: 200,
@@ -116,7 +120,7 @@ const options = {
         height: 200,
         justifyContent: "center",
         alignItems: "center",
-        marginBottom: 30,
+        marginBottom: 10,
     },
     text: {
         fontSize: 40,
