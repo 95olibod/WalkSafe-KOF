@@ -3,20 +3,23 @@
 
 // import React in our code
 import React, { useState } from "react";
-
 // import all the components we are going to use
 import {
+    Button,
     SafeAreaView,
     StyleSheet,
     Text,
-    View,
     TouchableHighlight,
+    View,
 } from "react-native";
-
 //importing library to use Stopwatch and Timer
-import { Stopwatch, Timer } from "react-native-stopwatch-timer";
+import { Timer } from "react-native-stopwatch-timer";
 
-const CountdownTimer = () => {
+interface Props {
+    onSetPage: (page: string) => void;
+}
+
+const CountdownTimer = ({ onSetPage }: Props) => {
     const [isTimerStart, setIsTimerStart] = useState(false);
     const [timerDuration, setTimerDuration] = useState(5 * 1000);
     const [resetTimer, setResetTimer] = useState(false);
@@ -45,29 +48,38 @@ const CountdownTimer = () => {
                         }}
                         //can call a function On finish of the time
                         // getTime={(time) => {
-                            //   console.log(time);
-                            // }}
-                 
-                            />
+                        //   console.log(time);
+                        // }}
+                    />
                     <TouchableHighlight
                         style={styles.margin}
                         onPress={() => {
                             setIsTimerStart(!isTimerStart);
                             setResetTimer(false);
                         }}
-                        >
+                    >
                         <Text style={[styles.buttonText, styles.margin]}>
                             {!isTimerStart ? "START" : "PAUS"}
                         </Text>
                     </TouchableHighlight>
+
                     <TouchableHighlight
-                        onPress={() => {
-                            setIsTimerStart(false);
-                            setResetTimer(true);
-                        }}
+                    //       onPress={() => {
+                    //           setIsTimerStart(false);
+                    //           setResetTimer(true);
+                    //       }}
                     >
-                        <Text style={styles.buttonText}>STOPP</Text>
+                        <Text
+                            style={styles.buttonText}
+                            onPress={() => alert("funkar")}
+                            //     onPress={() => onSetPage("home")}
+                        >
+                            STOPP
+                        </Text>
                     </TouchableHighlight>
+                    <Button title="GÅ HEM" onPress={() => onSetPage("home")}>
+                        STOPP
+                    </Button>
                 </View>
             </View>
         </SafeAreaView>

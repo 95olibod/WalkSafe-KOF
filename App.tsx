@@ -1,12 +1,38 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import { ImageBackground, StyleSheet, Text, View, Image } from "react-native";
 import HomePage from "./pages/homePage";
+import TimerPage from "./pages/timerPage";
+import ContactsPage from "./pages/contactsPage";
+import InformationPage from "./pages/informationPage";
 import image from "./public/images/background.jpeg";
+import EndTimerPage from "./pages/endTimerPage";
 
 //const image = { uri: "./public/images/background.jpeg"};
 
 export default function App() {
+  const [page, setPage] = useState("home");
+  const goHome = () => setPage("home");
+  // const goBack = () => setPage(prevstate => { return {...prevstate}); FIX LATER. EN GUBBE PÅ DET
+
+  const selectedPage = () => {
+      switch (page) {
+          case "home":
+              return <HomePage onSetPage={setPage} />;
+          // return <LoginPage color="green" />;
+          case "contacts":
+              return <ContactsPage onGoBack={goHome} onSetPage={setPage}/>;
+          case "information":
+              return <InformationPage onGoBack={goHome} onSetPage={setPage} />;
+          case "timer":
+                  return <TimerPage onSetPage={setPage} />;
+          case "endPage":
+            return <EndTimerPage onSetPage={setPage} />;
+      }
+  };
+
+
+
   return (
     <View style={styles.container}>
         <StatusBar style="auto" />
@@ -14,7 +40,7 @@ export default function App() {
       <ImageBackground source={image} resizeMode="cover" style={styles.image}>
         <View style={styles.contentContainer}>
         <Text>Walk Safe - KOF test!!</Text>
-        <HomePage />
+        {selectedPage()}
         </View>
       </ImageBackground>
     </View>
@@ -35,6 +61,7 @@ const styles = StyleSheet.create({
   },
   contentContainer:{
     marginRight: 30,
-    marginLeft: 30
+    marginLeft: 30,
+    height: "100%"
   }
 });
