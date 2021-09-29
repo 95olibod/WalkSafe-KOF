@@ -22,6 +22,8 @@ function contactReducer(state: ContactItem[], action: ContactAction) {
             const nextContact = [...state];
             const contactItem = action.payload;
             //console.log("VI är inne i add. Wooop Wooop")
+
+            
         
             const index = state.findIndex((contact) => contact.contactName === contactItem.contactName);
             if (index === -1) {
