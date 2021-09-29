@@ -6,6 +6,7 @@ import {
   Text,
   FlatList,
   SafeAreaView,
+  ScrollView,
 } from "react-native";
 import { ContactItem, useContacts } from "../context/contactContext";
 import * as Contacts from "expo-contacts";
@@ -24,7 +25,15 @@ const ContactCard = () => {
       setAllContact([...allContacts, contact]);
     }
   };
-  
+
+  const removeFavoriteContact = (contact: ContactItem) => {
+    const filteredList = allContacts.filter(
+      (searchedContact) => searchedContact !== contact
+    );
+
+    setAllContact(filteredList);
+  };
+
   async function getAllContacts() {
     const { status } = await Contacts.requestPermissionsAsync();
     if (status === "granted") {
@@ -79,17 +88,24 @@ const ContactCard = () => {
         keyExtractor={(contact) => contact.contactName}
       />
       <Text>FAVORITER</Text>
-      <FlatList
-        data={allContacts}
-        renderItem={({ item }) => {
-          return (
-            <View style={styles.contactBox}>
-              <Text style={styles.title}>{item.contactName}</Text>
-            </View>
-          );
-        }}
-        keyExtractor={(contact) => contact.contactName}
-      />
+      <ScrollView>
+        <FlatList
+          data={allContacts}
+          renderItem={({ item }) => {
+            return (
+              <View style={styles.contactBox}>
+                <Text
+                  onPress={() => removeFavoriteContact(item)}
+                  style={styles.title}
+                >
+                  {item.contactName}
+                </Text>
+              </View>
+            );
+          }}
+          keyExtractor={(contact) => contact.contactName}
+        />
+      </ScrollView>
     </SafeAreaView>
   );
 };
