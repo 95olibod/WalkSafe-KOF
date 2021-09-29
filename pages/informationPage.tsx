@@ -1,5 +1,6 @@
-import React from "react";
-import { View, Text, Button } from "react-native";
+import React, { useState } from "react";
+import { View, Text, Button, Switch } from "react-native";
+import InformationSwitches from "../components/informationSwitches"
 
 interface Props {
     onGoBack: () => void;
@@ -7,6 +8,7 @@ interface Props {
   }
 
   const InformationPage = ({onGoBack, onSetPage}: Props) => {
+
       return(
           <View>
                 <Text>INFORMATION page</Text>
@@ -19,6 +21,8 @@ interface Props {
                 title="gå till timer"
                 onPress={() => onSetPage("timer")}
             ></Button>
+            <Text style={{color: "white"}}>Välj vilken information som ska vara på meddelandet</Text>
+            <InformationSwitches/>
           </View>
       )
   }
