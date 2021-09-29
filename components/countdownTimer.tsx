@@ -5,7 +5,6 @@
 import React, { useState } from "react";
 // import all the components we are going to use
 import {
-    Button,
     SafeAreaView,
     StyleSheet,
     Text,
