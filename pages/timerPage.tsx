@@ -9,7 +9,6 @@ interface Props {
 function TimerPage({ onSetPage }: Props) {
     return (
         <View style={styles.container}>
-            <Text>TIMER PAGE</Text>
             <CountdownTimer onSetPage={() => onSetPage("endPage")} />
         </View>
     );
