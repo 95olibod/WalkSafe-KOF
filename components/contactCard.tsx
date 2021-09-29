@@ -26,6 +26,8 @@ const ContactCard = () => {
     }
   };
 
+  console.log(allContacts);
+
   const removeFavoriteContact = (contact: ContactItem) => {
     const filteredList = allContacts.filter(
       (searchedContact) => searchedContact !== contact
@@ -44,12 +46,14 @@ const ContactCard = () => {
       if (data.length > 0) {
         for (let i = 0; i < data.length; i++) {
           const name = data[i].name;
+          const id = data[i].id;
           const contactPhone = data[i].phoneNumbers;
           const phoneNumber = contactPhone?.map((contact) => contact.number);
 
           dispatch({
             type: "add-to-contacts",
             payload: {
+              contactId: id,
               contactName: name,
               phoneNumber: phoneNumber?.toString(),
             },
@@ -85,7 +89,7 @@ const ContactCard = () => {
             </View>
           );
         }}
-        keyExtractor={(contact) => contact.contactName}
+        keyExtractor={(contact) => contact.contactId}
       />
       <Text>FAVORITER</Text>
       <ScrollView>
@@ -103,7 +107,7 @@ const ContactCard = () => {
               </View>
             );
           }}
-          keyExtractor={(contact) => contact.contactName}
+          keyExtractor={(contact) => contact.contactId}
         />
       </ScrollView>
     </SafeAreaView>

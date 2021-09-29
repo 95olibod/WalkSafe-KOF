@@ -2,6 +2,7 @@ import React, { createContext, FC, useContext, useReducer } from "react";
 import contactReducer, { ContactAction } from "./contactsReducer";
 
 export interface ContactItem {
+    contactId: string;
     contactName: string;
     phoneNumber?: string;
 }
