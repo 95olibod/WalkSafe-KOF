@@ -44,7 +44,7 @@ const CountdownTimer = ({ onSetPage }: Props) => {
                         options={options}
                         //options for the styling
                         handleFinish={() => {
-                            alert("Nu är timer färdig");
+                            alert(CheckSmsAvailability());
                         }}
                         //can call a function On finish of the time
                         // getTime={(time) => {
