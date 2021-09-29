@@ -2,38 +2,57 @@ import React, { useState } from "react";
 import {
   View,
   StyleSheet,
-  Button,
   Text,
   FlatList,
   SafeAreaView,
   ScrollView,
+  Button,
 } from "react-native";
 import { ContactItem, useContacts } from "../context/contactContext";
 import * as Contacts from "expo-contacts";
 import contactReducer from "../context/contactsReducer";
 
 const ContactCard = () => {
-  const [allContacts, setAllContact] = useState<ContactItem[]>([]);
-  const { contactsList, dispatch } = useContacts();
+  const [contactButton, setButtonDisabled] = useState(false);
+
+  //Byta namn till favoritContacts ist?
+  // const [allContacts, setAllContact] = useState([]);
+  const [allContacts, setAllContact] = useState<Contacts.Contact[]>();
+
+  const { favoriteContacts, dispatch } = useContacts();
 
   const addFavoriteContact = (contact: ContactItem) => {
-    const contactExist = allContacts.find(
+    const contactExist = favoriteContacts.find(
       (searchedContact) => contact.contactName === searchedContact.contactName
     );
 
     if (!contactExist) {
-      setAllContact([...allContacts, contact]);
+      dispatch({
+        type: "add-to-contacts",
+        payload: {
+          contactId: contact.contactId,
+          contactName: contact.contactName,
+          phoneNumber: contact.phoneNumber?.toString(),
+        },
+      });
     }
   };
 
-  console.log(allContacts);
-
   const removeFavoriteContact = (contact: ContactItem) => {
-    const filteredList = allContacts.filter(
+    const filteredList = favoriteContacts.filter(
       (searchedContact) => searchedContact !== contact
     );
 
-    setAllContact(filteredList);
+    dispatch({
+      type: "remove-from-contacts",
+      payload: {
+        contactId: contact.contactId,
+        contactName: contact.contactName,
+        phoneNumber: contact.phoneNumber?.toString(),
+      },
+    });
+
+    //setAllContact(filteredList);
   };
 
   async function getAllContacts() {
@@ -50,33 +69,38 @@ const ContactCard = () => {
           const contactPhone = data[i].phoneNumbers;
           const phoneNumber = contactPhone?.map((contact) => contact.number);
 
-          dispatch({
-            type: "add-to-contacts",
-            payload: {
-              contactId: id,
+          console.log(name);
+          setAllContact([
+            ...allContacts,
+            {
               contactName: name,
+              contactId: id,
               phoneNumber: phoneNumber?.toString(),
             },
-          });
+          ]);
         }
       }
     }
+
+    setButtonDisabled(true);
   }
 
-  //     const renderItem = ({ contactName }: ContactItem) => (
-  //       <Item contactName={contactName} />
-  //     );
+  //VI SKA NOG LÄGGA TILL FAVORITLISTAN TILL CONTEXTEN. SÅ VI KOMMER ÅT DEN ÖVERALLT? Går skicka sms osv.
 
   return (
     <SafeAreaView style={styles.container}>
+      <Text style={styles.text}>ContactsPage</Text>
       {/* LÄGG IN HÄMTAR KONTAKTER (loading)..... */}
-      <Button
-        title="Hämta kontakter i kontakter"
-        onPress={() => getAllContacts()}
-      />
+      <View style={styles.contactBtn}>
+        <Button
+          disabled={contactButton}
+          title="Hämta kontakter"
+          onPress={() => getAllContacts()}
+        />
+      </View>
 
       <FlatList
-        data={contactsList}
+        data={allContacts}
         renderItem={({ item }) => {
           return (
             <View style={styles.contactBox}>
@@ -91,20 +115,20 @@ const ContactCard = () => {
         }}
         keyExtractor={(contact) => contact.contactId}
       />
-      <Text>FAVORITER</Text>
+      <Text style={styles.text}>FAVORITER</Text>
       <ScrollView>
         <FlatList
-          data={allContacts}
+          data={favoriteContacts}
           renderItem={({ item }) => {
             return (
-              <View style={styles.contactBox}>
+              <ScrollView style={styles.contactBox}>
                 <Text
                   onPress={() => removeFavoriteContact(item)}
                   style={styles.title}
                 >
                   {item.contactName}
                 </Text>
-              </View>
+              </ScrollView>
             );
           }}
           keyExtractor={(contact) => contact.contactId}
@@ -130,5 +154,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
+  },
+  contactBtn: {},
+  text: {
+    fontSize: 30,
+    color: "white",
   },
 });

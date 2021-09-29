@@ -11,15 +11,14 @@ interface Props {
 
 const ContactsPage = ({ onGoBack, onSetPage }: Props) => {
     return (
-        <View style={styles.container}>
-            <Text>Contacts page </Text>
+        <ScrollView style={styles.contentContainer}>
             <Button title="Gå tillbaka" onPress={onGoBack}></Button>
             <Button
                 title="Gå till information"
                 onPress={() => onSetPage("information")}
             ></Button>
             <ContactCard />
-        </View>
+        </ScrollView>
     );
 };
 
