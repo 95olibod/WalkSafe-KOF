@@ -4,7 +4,7 @@ import contactReducer, { ContactAction } from "./contactsReducer";
 export interface ContactItem {
   contactId: string;
   contactName: string;
-  phoneNumber?: string;
+  phoneNumber: string;
 }
 
 interface ContextValue {
