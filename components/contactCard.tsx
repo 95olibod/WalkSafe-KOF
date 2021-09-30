@@ -15,8 +15,6 @@ import contactReducer from "../context/contactsReducer";
 const ContactCard = () => {
   const [contactButton, setButtonDisabled] = useState(false);
 
-  //Byta namn till favoritContacts ist?
-  //const [allContacts, setAllContact] = useState();
   const [allContacts, setAllContact] = useState<ContactItem[]>([]);
 
   const { favoriteContacts, dispatch } = useContacts();
@@ -38,6 +36,7 @@ const ContactCard = () => {
     }
   };
 
+  //TODO NOT WORKING
   const removeFavoriteContact = (contact: ContactItem) => {
     const filteredList = favoriteContacts.filter(
       (searchedContact) => searchedContact !== contact
@@ -51,8 +50,6 @@ const ContactCard = () => {
         phoneNumber: contact.phoneNumber?.toString(),
       },
     });
-
-    //setAllContact(filteredList);
   };
 
   async function getAllContacts() {
@@ -63,48 +60,27 @@ const ContactCard = () => {
       });
 
       if (data.length > 0) {
+
+        let newArray = []
         for (let i = 0; i < data.length; i++) {
           const contactName = data[i].name;
           const contactId = data[i].id;
           const contactPhone = data[i].phoneNumbers;
           const phoneNumber = contactPhone?.map((contact) => contact.number);
-          //const phoneNumber = contactPhone?.map((contact) => contact.number);
-          
-
-          //TODO
-          //KOLLA IMORGON 30/9
-      //     https://stackoverflow.com/questions/59667515/type-object-must-have-a-symbol-iterator-method-that-returns-an-iterator
-      //KOLLA ÄVEN REMOVE FROM FAVORITES
 
           console.log(allContacts);
-          
           const newContact = {contactId: contactId, contactName: contactName, phoneNumber: phoneNumber?.toString()}
-          setAllContact([...allContacts, newContact])
-
-
-      //     setAllContact([
-      //           ...allContacts,            
-      //         {id: contactId,
-      //         contactName: contactName
-      //       //   phoneNumbers: phoneNumber?.toString()
-      //       //   phoneNumber: phoneNumber?.toString(),
-      //     }]
-      
-      
-      //     );
-        }
+          newArray.push(newContact)
+          }
+          setAllContact(newArray)
       }
     }
-
     setButtonDisabled(true);
   }
-
-  //VI SKA NOG LÄGGA TILL FAVORITLISTAN TILL CONTEXTEN. SÅ VI KOMMER ÅT DEN ÖVERALLT? Går skicka sms osv.
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.text}>ContactsPage</Text>
-      {/* LÄGG IN HÄMTAR KONTAKTER (loading)..... */}
       <View style={styles.contactBtn}>
         <Button
           disabled={contactButton}
@@ -156,7 +132,7 @@ export default ContactCard;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: "100%",
   },
   contactBox: {
     backgroundColor: "#fff",
