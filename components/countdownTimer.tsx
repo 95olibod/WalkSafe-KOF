@@ -5,7 +5,6 @@
 import React, { useState } from "react";
 // import all the components we are going to use
 import {
-    Button,
     SafeAreaView,
     StyleSheet,
     Text,
@@ -21,7 +20,7 @@ interface Props {
 
 const CountdownTimer = ({ onSetPage }: Props) => {
     const [isTimerStart, setIsTimerStart] = useState(false);
-    const [timerDuration, setTimerDuration] = useState(10 * 1000);
+    const [timerDuration, setTimerDuration] = useState(10000 * 1000);
     const [resetTimer, setResetTimer] = useState(false);
 
     //   const [isStopwatchStart, setIsStopwatchStart] = useState(false);
@@ -30,8 +29,6 @@ const CountdownTimer = ({ onSetPage }: Props) => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.container}>
-                <Text style={styles.title}>Välj tid för ankomst</Text>
-
                 <View style={styles.sectionStyle}>
                     <Timer
                         totalDuration={timerDuration}
@@ -52,18 +49,18 @@ const CountdownTimer = ({ onSetPage }: Props) => {
                         // }}
                     />
                     <TouchableHighlight
-                        style={styles.margin}
                         onPress={() => {
                             setIsTimerStart(!isTimerStart);
                             setResetTimer(false);
                         }}
                     >
-                        <Text style={[styles.buttonText, styles.margin]}>
-                            {!isTimerStart ? "START" : "PAUS"}
+                        <Text style={[ styles.pauseButton ]}>
+                            {!isTimerStart ? "STARTA" : "PAUSA"}
                         </Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
+                    style={styles.marginTop}
                         onPress={() => {
                             setIsTimerStart(false);
                             setResetTimer(true);
@@ -71,10 +68,10 @@ const CountdownTimer = ({ onSetPage }: Props) => {
                         }}
                     >
                         <Text
-                            style={styles.buttonText}
+                            style={[styles.buttonText, styles.StopText]}
                             //   onPress={() => onSetPage("endPage")}
                         >
-                            STOPP
+                            Stoppa timer
                         </Text>
                     </TouchableHighlight>
                     {/* <Button title="GÅ HEM" onPress={() => onSetPage("home")}>
@@ -93,8 +90,6 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 10,
         justifyContent: "center",
-        alignItems: "center",
-        marginTop: 30,
     },
     title: {
         textAlign: "center",
@@ -104,9 +99,7 @@ const styles = StyleSheet.create({
     },
     sectionStyle: {
         flex: 1,
-        marginTop: 32,
         alignItems: "center",
-        justifyContent: "center",
     },
     buttonText: {
         fontSize: 20,
@@ -114,29 +107,37 @@ const styles = StyleSheet.create({
         padding: 15,
         borderRadius: 5,
         color: "#FFF",
-        backgroundColor: "rgba(45, 155, 240, 0.8)",
-        // backgroundColor: "blue",
+        backgroundColor: "rgba(45, 155, 240, 0.4)",
+        alignItems: "center",
+        alignSelf:"center",
     },
-    margin: {
-        marginBottom: 10,
+    pauseButton: {
+        color: "#FFFF",
+        padding:50,
+        marginTop: -40,
+    },
+    StopText: {
+        fontSize: 38,
+    },
+    marginTop: {
+        marginTop: 90,
     },
 });
 
 const options = {
     container: {
         // backgroundColor: "#2D9BF0",
-        backgroundColor: "rgba(45, 155, 240, 0.8)",
+        backgroundColor: "rgba(45, 155, 240, 0.3)",
         padding: 5,
         borderRadius: 200,
         width: 200,
         height: 200,
         justifyContent: "center",
         alignItems: "center",
-        marginBottom: 10,
+        marginBottom: 1,
     },
     text: {
         fontSize: 40,
         color: "#FFF",
-        // marginLeft: 7,
     },
 };
