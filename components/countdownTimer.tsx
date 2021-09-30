@@ -9,6 +9,7 @@ import {
 import { Timer } from "react-native-stopwatch-timer";
 import { useContacts } from "../context/contactContext";
 import { CheckSmsAvailability } from "./smsSender";
+import * as Device from "expo-device";
 
 interface Props {
     onSetPage: (page: string) => void;
@@ -17,11 +18,15 @@ interface Props {
 const CountdownTimer = ({ onSetPage }: Props) => {
     const { favoriteContacts, dispatch } = useContacts();
 
+    
     async function handlePress() {
+        const deviceName= Device.deviceName;
+        const deviceModel= Device.modelId;
+        
         const favoritNumbers = favoriteContacts.map(
             (contact) => contact.phoneNumber
         );
-        await CheckSmsAvailability(favoritNumbers);
+        await CheckSmsAvailability(favoritNumbers, deviceName, deviceModel);
     }
 
     const [isTimerStart, setIsTimerStart] = useState(false);
