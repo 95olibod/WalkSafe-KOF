@@ -1,31 +1,39 @@
 import React from "react";
 import { Button, View, StyleSheet, Text } from "react-native";
 import CountdownTimer from "../components/countdownTimer";
+import LocationFunc from "../components/location";
 
 interface Props {
-    onSetPage: (page: string) => void;
+  onSetPage: (page: string) => void;
 }
 
 function HomePage({ onSetPage }: Props) {
-    return (
-        <View style={styles.container}>
-          <Text>HOME PAGE</Text>
-            <Button title="HOMEPAGE BUTTON" onPress={() => alert("HJÄLP")}></Button>
-            <Button
-                title="GÅ vidare till kontakter"
-                onPress={() => onSetPage("contacts")}
-            ></Button>
-
-            {/* <CountdownTimer /> */}
-        </View>
-    );
+  return (
+    <View style={styles.container}>
+      <View>
+        <Text style={styles.text}>HOME PAGE</Text>
+        <Button
+          title="Klicka för hjälp"
+          onPress={() => alert("HJÄLP")}
+        ></Button>
+        <Button
+          title="GÅ vidare till kontakter"
+          onPress={() => onSetPage("contacts")}
+        ></Button>
+        {/* <CountdownTimer /> */}
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: "green",
-        height: "100%",
-    },
+  container: {
+    height: "100%",
+    alignItems: "center",
+  },
+  text: {
+    color: "white",
+  },
 });
 
 export default HomePage;
