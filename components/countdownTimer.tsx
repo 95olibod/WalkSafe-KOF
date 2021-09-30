@@ -1,65 +1,34 @@
-// Example of React Native Timer and Stopwatch
-// https://aboutreact.com/react-native-timer-stopwatch/
-
-// import React in our code
 import React, { useState } from "react";
-// import all the components we are going to use
 import {
     SafeAreaView,
     StyleSheet,
     Text,
     TouchableHighlight,
-    View,
+    View
 } from "react-native";
-//importing library to use Stopwatch and Timer
 import { Timer } from "react-native-stopwatch-timer";
-
-//Importing library to use SMS
-import * as SMS from 'expo-sms';
+import { useContacts } from "../context/contactContext";
+import { CheckSmsAvailability } from "./smsSender";
 
 interface Props {
     onSetPage: (page: string) => void;
 }
 
-async function CheckSmsAvailability(){
-    const isAvailable : boolean = await SMS.isAvailableAsync();
-    if (isAvailable){
-        // do your SMS stuff here
-        
-        SendSms();
-        return "Message sent";
-    }
-    else {
-        // misfortune... there's no SMS available on this device
-        return "Unable to send message";
-    }
-}
-
-// List containing Recipients of alarm message
-const recipientsList = ["hej", "bla"];
-
-// Message to sent to recipientList (should be chonst)
-let messageToSend : string;
-
-async function SendSms(){
-    const { result } = await SMS.sendSMSAsync(
-        recipientsList,
-        messageToSend,
-        // ['0733660216', '0704765941'],
-        // 'Testmeddelande från appen...',
-    )
-}
-
 const CountdownTimer = ({ onSetPage }: Props) => {
+    const { favoriteContacts, dispatch } = useContacts();
+
+    async function handlePress() {
+        const favoritNumbers = favoriteContacts.map(
+            (contact) => contact.phoneNumber
+        );
+        await CheckSmsAvailability(favoritNumbers);
+    }
+
     const [isTimerStart, setIsTimerStart] = useState(false);
 
     const [timerDuration, setTimerDuration] = useState(3 * 1000);
 
-
     const [resetTimer, setResetTimer] = useState(false);
-
-    //   const [isStopwatchStart, setIsStopwatchStart] = useState(false);
-    //   const [resetStopwatch, setResetStopwatch] = useState(false);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -76,8 +45,8 @@ const CountdownTimer = ({ onSetPage }: Props) => {
                         options={options}
                         //options for the styling
                         handleFinish={() => {
-                            CheckSmsAvailability();
-                            alert("message sent...");
+                            handlePress();
+                            //alert("message sent...");
                         }}
                         //can call a function On finish of the time
                         // getTime={(time) => {
@@ -90,13 +59,13 @@ const CountdownTimer = ({ onSetPage }: Props) => {
                             setResetTimer(false);
                         }}
                     >
-                        <Text style={[ styles.pauseButton ]}>
+                        <Text style={[styles.pauseButton]}>
                             {!isTimerStart ? "STARTA" : "PAUSA"}
                         </Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
-                    style={styles.marginTop}
+                        style={styles.marginTop}
                         onPress={() => {
                             setIsTimerStart(false);
                             setResetTimer(true);
@@ -145,11 +114,11 @@ const styles = StyleSheet.create({
         color: "#FFF",
         backgroundColor: "rgba(45, 155, 240, 0.4)",
         alignItems: "center",
-        alignSelf:"center",
+        alignSelf: "center",
     },
     pauseButton: {
         color: "#FFFF",
-        padding:50,
+        padding: 50,
         marginTop: -40,
     },
     StopText: {
