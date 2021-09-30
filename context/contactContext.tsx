@@ -15,6 +15,7 @@ interface ContextValue {
 const ContactContext = createContext<ContextValue>({} as any);
 
 const ContactsProvider: FC = ({ children }) => {
+  
   //Define state
   const [favoriteContacts, dispatch] = useReducer(contactReducer, []);
   return (
