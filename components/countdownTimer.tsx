@@ -15,13 +15,45 @@ import {
 //importing library to use Stopwatch and Timer
 import { Timer } from "react-native-stopwatch-timer";
 
+//Importing library to use SMS
+import * as SMS from 'expo-sms';
+
 interface Props {
     onSetPage: (page: string) => void;
 }
 
+async function CheckSmsAvailability(){
+    const isAvailable : boolean = await SMS.isAvailableAsync();
+    if (isAvailable){
+        // do your SMS stuff here
+        
+        SendSms();
+        return "Message sent";
+    }
+    else {
+        // misfortune... there's no SMS available on this device
+        return "Unable to send message";
+    }
+}
+
+// List containing Recipients of alarm message
+const recipientsList = ["hej", "bla"];
+
+// Message to sent to recipientList (should be chonst)
+let messageToSend : string;
+
+async function SendSms(){
+    const { result } = await SMS.sendSMSAsync(
+        recipientsList,
+        messageToSend,
+        // ['0733660216', '0704765941'],
+        // 'Testmeddelande från appen...',
+    )
+}
+
 const CountdownTimer = ({ onSetPage }: Props) => {
     const [isTimerStart, setIsTimerStart] = useState(false);
-    const [timerDuration, setTimerDuration] = useState(10 * 1000);
+    const [timerDuration, setTimerDuration] = useState(3 * 1000);
     const [resetTimer, setResetTimer] = useState(false);
 
     //   const [isStopwatchStart, setIsStopwatchStart] = useState(false);
@@ -44,7 +76,8 @@ const CountdownTimer = ({ onSetPage }: Props) => {
                         options={options}
                         //options for the styling
                         handleFinish={() => {
-                            alert(CheckSmsAvailability());
+                            CheckSmsAvailability();
+                            alert("message sent...");
                         }}
                         //can call a function On finish of the time
                         // getTime={(time) => {
