@@ -16,8 +16,8 @@ const ContactCard = () => {
   const [contactButton, setButtonDisabled] = useState(false);
 
   //Byta namn till favoritContacts ist?
-  // const [allContacts, setAllContact] = useState([]);
-  const [allContacts, setAllContact] = useState<Contacts.Contact[]>();
+  //const [allContacts, setAllContact] = useState();
+  const [allContacts, setAllContact] = useState<ContactItem[]>([]);
 
   const { favoriteContacts, dispatch } = useContacts();
 
@@ -64,20 +64,34 @@ const ContactCard = () => {
 
       if (data.length > 0) {
         for (let i = 0; i < data.length; i++) {
-          const name = data[i].name;
-          const id = data[i].id;
+          const contactName = data[i].name;
+          const contactId = data[i].id;
           const contactPhone = data[i].phoneNumbers;
           const phoneNumber = contactPhone?.map((contact) => contact.number);
+          //const phoneNumber = contactPhone?.map((contact) => contact.number);
+          
 
-          console.log(name);
-          setAllContact([
-            ...allContacts,
-            {
-              contactName: name,
-              contactId: id,
-              phoneNumber: phoneNumber?.toString(),
-            },
-          ]);
+          //TODO
+          //KOLLA IMORGON 30/9
+      //     https://stackoverflow.com/questions/59667515/type-object-must-have-a-symbol-iterator-method-that-returns-an-iterator
+      //KOLLA ÄVEN REMOVE FROM FAVORITES
+
+          console.log(allContacts);
+          
+          const newContact = {contactId: contactId, contactName: contactName, phoneNumber: phoneNumber?.toString()}
+          setAllContact([...allContacts, newContact])
+
+
+      //     setAllContact([
+      //           ...allContacts,            
+      //         {id: contactId,
+      //         contactName: contactName
+      //       //   phoneNumbers: phoneNumber?.toString()
+      //       //   phoneNumber: phoneNumber?.toString(),
+      //     }]
+      
+      
+      //     );
         }
       }
     }
