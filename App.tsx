@@ -7,6 +7,7 @@ import ContactsPage from "./pages/contactsPage";
 import InformationPage from "./pages/informationPage";
 import image from "./public/images/background.jpeg";
 import EndTimerPage from "./pages/endTimerPage";
+import LocationFunc from "./components/location";
 
 //const image = { uri: "./public/images/background.jpeg"};
 
