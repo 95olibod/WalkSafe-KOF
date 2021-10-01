@@ -18,7 +18,9 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
     "react-native-stopwatch-timer": "^0.0.21",
     "react-native-web": "~0.13.12",
-    "expo-device": "~3.3.0"
+    "expo-device": "~3.3.0",
+    "expo-battery": "~5.0.0"
+
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
