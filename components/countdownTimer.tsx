@@ -20,9 +20,18 @@ const CountdownTimer = ({ onSetPage }: Props) => {
 
     
     async function handlePress() {
-        const deviceName= Device.deviceName;
-        const deviceModel= Device.modelId;
+        let deviceName= Device.deviceName;
+        let deviceModel: string= Device.modelId;
+        if(deviceName === null){
+            console.log(deviceName + " den var null, sätt den till :");
+            deviceName = "namn okänt";
+        }
+        if(!deviceModel){
+            deviceModel = "okänd enhet";
+        }
         
+        console.log(deviceName + "devicename");
+        console.log(deviceModel + "devicemodel");
         const favoritNumbers = favoriteContacts.map(
             (contact) => contact.phoneNumber
         );
