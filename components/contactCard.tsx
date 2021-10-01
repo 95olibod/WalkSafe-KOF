@@ -60,17 +60,33 @@ const ContactCard = () => {
 
       if (data.length > 0) {
 
-        let newArray = []
+        const newArray: ContactItem[] = [];
+
         for (let i = 0; i < data.length; i++) {
           const contactName = data[i].name;
           const contactId = data[i].id;
           const contactPhone = data[i].phoneNumbers;
-          const phoneNumber = contactPhone?.map((contact) => contact.number);
-
-          const newContact = {contactId: contactId, contactName: contactName, phoneNumber: phoneNumber?.toString()}
-          newArray.push(newContact)
+          if (contactPhone) {
+              const phoneNumber = contactPhone.map(
+                  (contact) => contact.number
+              );
+              const newContact = {
+                  contactId: contactId,
+                  contactName: contactName,
+                  phoneNumber: phoneNumber.toString(),
+              };
+              newArray.push(newContact);
+          } else {
+              const phoneNumber = "";
+              const newContact = {
+                  contactId: contactId,
+                  contactName: contactName,
+                  phoneNumber: phoneNumber.toString(),
+              };
+              newArray.push(newContact);
           }
-          setAllContact(newArray)
+      }
+      setAllContact(newArray);
       }
     }
     setButtonDisabled(true);

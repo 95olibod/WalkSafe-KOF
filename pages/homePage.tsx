@@ -2,6 +2,7 @@ import React from "react";
 import { Button, View, StyleSheet, Text } from "react-native";
 import CountdownTimer from "../components/countdownTimer";
 import LocationFunc from "../components/location";
+import Battery from "../components/battery";
 
 interface Props {
   onSetPage: (page: string) => void;
@@ -21,6 +22,7 @@ function HomePage({ onSetPage }: Props) {
           onPress={() => onSetPage("contacts")}
         ></Button>
         {/* <CountdownTimer /> */}
+        <Battery/>
       </View>
     </View>
   );
