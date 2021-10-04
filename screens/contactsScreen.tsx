@@ -11,7 +11,7 @@ import { RootStackParamList } from "../navigators/RootStackNavigator";
 //     onSetPage: (page: string) => void;
 // }
 
-type Props = NativeStackScreenProps<RootStackParamList, "Contact">;
+type Props = NativeStackScreenProps<RootStackParamList, "Kontakter">;
 
 const ContactsPage = ({ navigation }: Props) => {
     return (

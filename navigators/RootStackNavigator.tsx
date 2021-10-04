@@ -2,19 +2,18 @@ import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import React from "react";
-import HomePage from "../pages/homePage";
-import EndTimerPage from "../pages/endTimerPage";
-import ContactsPage from "../pages/contactsPage";
-import InformationPage from "../pages/informationPage";
-import TimerPage from "../pages/timerPage";
+import HomeScreen from "../screens/homeScreen";
+import EndTimerScreen from "../screens/endTimerScreen";
+import ContactsScreen from "../screens/contactsScreen";
+import InformationScreen from "../screens/informationScreen";
+import TimerScreen from "../screens/timerScreen";
 import Constants from "expo-constants";
 
 export type RootStackParamList = {
     Hem: undefined;
-    About: undefined;
     Information: undefined;
-    Contact: undefined;
-    EndTimer: undefined;
+    Kontakter: undefined;
+    EndTimerScreen: undefined;
     Timer: undefined;
 };
 
@@ -46,11 +45,17 @@ export default function RootStackNavigator() {
                     }
                 }
             >
-                <Stack.Screen name="Hem" component={HomePage} />
-                <Stack.Screen name="Information" component={InformationPage} />
-                <Stack.Screen name="Contact" component={ContactsPage} />
-                <Stack.Screen name="Timer" component={TimerPage} />
-                <Stack.Screen name="EndTimer" component={EndTimerPage} />
+                <Stack.Screen name="Hem" component={HomeScreen} />
+                <Stack.Screen
+                    name="Information"
+                    component={InformationScreen}
+                />
+                <Stack.Screen name="Kontakter" component={ContactsScreen} />
+                <Stack.Screen name="Timer" component={TimerScreen} />
+                <Stack.Screen
+                    name="EndTimerScreen"
+                    component={EndTimerScreen}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );

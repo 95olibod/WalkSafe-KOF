@@ -2,10 +2,6 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import * as SMS from "expo-sms";
 import { RootStackParamList } from "../navigators/RootStackNavigator";
 
-// interface Props {
-//   onSetPage?: (page: string) => void;
-// }
-
 type Props = NativeStackScreenProps<RootStackParamList, "Hem">;
 
 export async function CheckSmsAvailability(

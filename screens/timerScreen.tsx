@@ -13,12 +13,11 @@ interface Props {
     route: any;
 }
 
-function TimerPage({ navigation }: Props) {
-    // const route = useRoute();
+function TimerScreen({ navigation }: Props) {
     return (
         <View style={styles.container}>
             <CountdownTimer
-                navigation={navigation.navigate("EndTimer")}
+                navigation={navigation.navigate("EndTimerScreen")}
                 route={navigation.navigate("Timer")}
             />
         </View>
@@ -33,4 +32,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default TimerPage;
+export default TimerScreen;

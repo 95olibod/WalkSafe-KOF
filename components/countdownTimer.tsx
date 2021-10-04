@@ -13,7 +13,7 @@ import * as Device from "expo-device";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigators/RootStackNavigator";
 
-type Props = NativeStackScreenProps<RootStackParamList, "Contact">;
+type Props = NativeStackScreenProps<RootStackParamList, "Kontakter">;
 
 const CountdownTimer = ({ navigation }: Props) => {
     const { favoriteContacts, dispatch } = useContacts();
@@ -78,7 +78,8 @@ const CountdownTimer = ({ navigation }: Props) => {
                         onPress={() => {
                             setIsTimerStart(false);
                             setResetTimer(true);
-                            navigation.navigate("EndTimer");
+                            //KOLLA DENNA
+                            // navigation.navigate("EndTimerScreen");
                         }}
                     >
                         <Text

@@ -9,12 +9,12 @@ import {
     SafeAreaView,
     ScrollView,
 } from "react-native";
-import HomePage from "./pages/homePage";
-import TimerPage from "./pages/timerPage";
-import ContactsPage from "./pages/contactsPage";
-import InformationPage from "./pages/informationPage";
+import HomePage from "./screens/homeScreen";
+import TimerScreen from "./screens/timerScreen";
+import ContactsPage from "./screens/contactsScreen";
+import InformationPage from "./screens/informationScreen";
 import image from "./public/images/background.jpeg";
-import EndTimerPage from "./pages/endTimerPage";
+import EndTimerScreen from "./screens/endTimerScreen";
 
 import LocationFunc from "./components/location";
 
@@ -24,11 +24,7 @@ import RootStackNavigator from "./navigators/RootStackNavigator";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function App() {
-    //const [page, setPage] = useState("home");
-    //const goHome = () => setPage("home");
-
     return (
-        // <SafeAreaProvider>
         <ContactsProvider>
             <StatusBar style="auto" />
             <SafeAreaProvider style={styles.root}>
@@ -48,13 +44,7 @@ export default function App() {
 const styles = StyleSheet.create({
     root: {
         flex: 1,
-        // alignItems: "center",
-        // justifyContent: "center",
-        // alignSelf: "center"
-        // backgroundColor: "red"
         marginBottom: 100,
-        //marginBottom: 20,
-        // opacity: 0,
     },
     container: {
         flex: 1,
@@ -64,8 +54,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         width: "100%",
         height: "100%",
-        // position: "absolute",
-        // zIndex: 1200
     },
     contentContainer: {
         marginRight: 30,

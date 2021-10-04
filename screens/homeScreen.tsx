@@ -10,7 +10,7 @@ import { RootStackParamList } from "../navigators/RootStackNavigator";
 //   onSetPage: (page: string) => void;
 // }
 
-type Props = NativeStackScreenProps<RootStackParamList, "Contact">;
+type Props = NativeStackScreenProps<RootStackParamList, "Kontakter">;
 
 function HomePage({ navigation }: Props) {
     return (
@@ -23,9 +23,8 @@ function HomePage({ navigation }: Props) {
                 ></Button>
                 <Button
                     title="GÅ vidare till kontakter"
-                    onPress={() => navigation.navigate("Contact")}
+                    onPress={() => navigation.navigate("Kontakter")}
                 ></Button>
-                {/* <CountdownTimer /> */}
                 <Battery />
             </View>
         </View>
