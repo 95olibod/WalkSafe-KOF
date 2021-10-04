@@ -4,34 +4,29 @@ import {
     StyleSheet,
     Text,
     TouchableHighlight,
-    View
+    View,
 } from "react-native";
 import { Timer } from "react-native-stopwatch-timer";
 import { useContacts } from "../context/contactContext";
 import { CheckSmsAvailability } from "./smsSender";
 import * as Device from "expo-device";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../navigators/RootStackNavigator";
 
-interface Props {
-    onSetPage: (page: string) => void;
-}
+type Props = NativeStackScreenProps<RootStackParamList, "Contact">;
 
-const CountdownTimer = ({ onSetPage }: Props) => {
+const CountdownTimer = ({ navigation }: Props) => {
     const { favoriteContacts, dispatch } = useContacts();
 
-    
     async function handlePress() {
-        let deviceName= Device.deviceName;
-        let deviceModel: string= Device.modelId;
-        if(deviceName === null){
-            console.log(deviceName + " den var null, sätt den till :");
+        let deviceName = Device.deviceName;
+        let deviceModel: string = Device.modelId;
+        if (deviceName === null) {
             deviceName = "namn okänt";
         }
-        if(!deviceModel){
+        if (!deviceModel) {
             deviceModel = "okänd enhet";
         }
-        
-        console.log(deviceName + "devicename");
-        console.log(deviceModel + "devicemodel");
         const favoritNumbers = favoriteContacts.map(
             (contact) => contact.phoneNumber
         );
@@ -83,7 +78,7 @@ const CountdownTimer = ({ onSetPage }: Props) => {
                         onPress={() => {
                             setIsTimerStart(false);
                             setResetTimer(true);
-                            onSetPage("endPage");
+                            navigation.navigate("EndTimer");
                         }}
                     >
                         <Text
