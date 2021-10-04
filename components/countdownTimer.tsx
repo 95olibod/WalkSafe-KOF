@@ -1,30 +1,48 @@
-// Example of React Native Timer and Stopwatch
-// https://aboutreact.com/react-native-timer-stopwatch/
-
-// import React in our code
 import React, { useState } from "react";
-// import all the components we are going to use
 import {
     SafeAreaView,
     StyleSheet,
     Text,
     TouchableHighlight,
-    View,
+    View
 } from "react-native";
-//importing library to use Stopwatch and Timer
 import { Timer } from "react-native-stopwatch-timer";
+import { useContacts } from "../context/contactContext";
+import { CheckSmsAvailability } from "./smsSender";
+import * as Device from "expo-device";
 
 interface Props {
     onSetPage: (page: string) => void;
 }
 
 const CountdownTimer = ({ onSetPage }: Props) => {
-    const [isTimerStart, setIsTimerStart] = useState(false);
-    const [timerDuration, setTimerDuration] = useState(10000 * 1000);
-    const [resetTimer, setResetTimer] = useState(false);
+    const { favoriteContacts, dispatch } = useContacts();
 
-    //   const [isStopwatchStart, setIsStopwatchStart] = useState(false);
-    //   const [resetStopwatch, setResetStopwatch] = useState(false);
+    
+    async function handlePress() {
+        let deviceName= Device.deviceName;
+        let deviceModel: string= Device.modelId;
+        if(deviceName === null){
+            console.log(deviceName + " den var null, sätt den till :");
+            deviceName = "namn okänt";
+        }
+        if(!deviceModel){
+            deviceModel = "okänd enhet";
+        }
+        
+        console.log(deviceName + "devicename");
+        console.log(deviceModel + "devicemodel");
+        const favoritNumbers = favoriteContacts.map(
+            (contact) => contact.phoneNumber
+        );
+        await CheckSmsAvailability(favoritNumbers, deviceName, deviceModel);
+    }
+
+    const [isTimerStart, setIsTimerStart] = useState(false);
+
+    const [timerDuration, setTimerDuration] = useState(3 * 1000);
+
+    const [resetTimer, setResetTimer] = useState(false);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -41,7 +59,8 @@ const CountdownTimer = ({ onSetPage }: Props) => {
                         options={options}
                         //options for the styling
                         handleFinish={() => {
-                            alert("Nu är timer färdig");
+                            handlePress();
+                            //alert("message sent...");
                         }}
                         //can call a function On finish of the time
                         // getTime={(time) => {
@@ -54,13 +73,13 @@ const CountdownTimer = ({ onSetPage }: Props) => {
                             setResetTimer(false);
                         }}
                     >
-                        <Text style={[ styles.pauseButton ]}>
+                        <Text style={[styles.pauseButton]}>
                             {!isTimerStart ? "STARTA" : "PAUSA"}
                         </Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
-                    style={styles.marginTop}
+                        style={styles.marginTop}
                         onPress={() => {
                             setIsTimerStart(false);
                             setResetTimer(true);
@@ -109,11 +128,11 @@ const styles = StyleSheet.create({
         color: "#FFF",
         backgroundColor: "rgba(45, 155, 240, 0.4)",
         alignItems: "center",
-        alignSelf:"center",
+        alignSelf: "center",
     },
     pauseButton: {
         color: "#FFFF",
-        padding:50,
+        padding: 50,
         marginTop: -40,
     },
     StopText: {
