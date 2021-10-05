@@ -9,13 +9,15 @@ import { RootStackParamList } from "../navigators/RootStackNavigator";
 
 export async function SendSms(
   favoritNumbers: string[],
-  deviceName: string,
-  deviceModel: string,
+  deviceName: string | undefined,
+  deviceModel: string | undefined,
   battery: number,
+  locationLongitude: number,
+  locationLatitude: number,
 ) {
   const isAvailable: boolean = await SMS.isAvailableAsync();
   if (isAvailable) {
-    const message = messageoutput(deviceName, deviceModel, battery)
+    const message = messageoutput(deviceName, deviceModel, battery, locationLongitude, locationLatitude)
     const { result } = await SMS.sendSMSAsync(favoritNumbers, message);
 
     return result;
@@ -27,7 +29,7 @@ export async function SendSms(
 
 // Message to sent to recipientList (should be const)
 
-const messageoutput = (deviceName: string, deviceModel: string, battery: number) => { 
+const messageoutput = (deviceName: string | undefined, deviceModel: string | undefined, battery: number, locationLongitude: number, locationLatitude: number) => { 
 
   const warningMessage = "NÖDANROP! skickat via Walk Safe" + "\n\n";
 
@@ -35,7 +37,8 @@ const messageoutput = (deviceName: string, deviceModel: string, battery: number)
 
   const deviceUnit = `Enhet - ${deviceModel}, - ${deviceName}:\n`;
   const batteryLevel = ` - Batteri: ${battery}%\n`;
-  const location = " - PlatsInfo: Kullegatan 6 51533 Viskafors\n";
+  const location = ` - PlatsInfo:\n     Longitude: ${locationLongitude}\n     Latitude: ${locationLatitude}`;
+
 //   const active = " - Senast aktiv: 30/09-21 18:42\n";
 
   const deviceInfo = batteryLevel + location;

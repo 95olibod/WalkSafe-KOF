@@ -12,25 +12,15 @@ type Props = NativeStackScreenProps<RootStackParamList, "Timer">;
 
 function TimerScreen({ navigation }: Props) {
 
-    const { batteryLevel } = useContext(DeviceContext);
-
-
-  
+    const { batteryLevel, locationLongitude, locationLatitude, deviceName, deviceModel } = useContext(DeviceContext);
+    
     const { favouriteContacts } = useContacts();
 
     async function handleTimerFinished() {
-        let deviceName = Device.deviceName;
-        let deviceModel: string = Device.modelId;
-        if (deviceName === null) {
-            deviceName = "namn okänt";
-        }
-        if (!deviceModel) {
-            deviceModel = "okänd enhet";
-        }
         const favoritNumbers = favouriteContacts.map(
             (contact) => contact.phoneNumber
         );
-        const result = await SendSms(favoritNumbers, deviceName, deviceModel, batteryLevel);
+        const result = await SendSms(favoritNumbers, deviceName, deviceModel, batteryLevel, locationLongitude, locationLatitude);
 
         if (result === "sent") {
             //FÅ NOTIS
