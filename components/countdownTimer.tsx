@@ -17,9 +17,12 @@ interface Props {
 
 const CountdownTimer = ({ onStop, handleTimerFinished }: Props) => {
 
+    const { timerInput } = useContext(DeviceContext);
+
+
     const [isTimerStart, setIsTimerStart] = useState(false);
 
-    const [timerDuration, setTimerDuration] = useState(3 * 1000);
+    const timerDuration = ((timerInput * 60) * 1000);
 
     const [resetTimer, setResetTimer] = useState(false);
 

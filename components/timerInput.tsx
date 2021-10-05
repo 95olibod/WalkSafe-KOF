@@ -20,8 +20,6 @@ function TimerInput() {
   const [hours, setHours] = useState(0);
   const [totalMinutes, setTotalMinutes] = useState(0);
 
-  //TODO: VIDARE TILL CONTEXT
-
   return (
     <View style={styles.root}>
           <Text style={styles.validationText}> {totalMinutes >= 1 ? "" : "Timer måste minst ställas in på 1 minut"}</Text>
