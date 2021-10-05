@@ -1,5 +1,5 @@
 import * as Contacts from "expo-contacts";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     Button,
     FlatList,
@@ -8,13 +8,15 @@ import {
     StyleSheet,
     Text,
     TextInput,
+    TouchableHighlight,
     View,
 } from "react-native";
 import { ContactItem, useContacts } from "../context/contactContext";
+import ContactButton from "./contactButton";
+import FavoriteContacts from "./favoriteContacts";
+import SearchBarContacts from "./searchBarContacts";
 
 const ContactCard = () => {
-    const [contactButton, setButtonDisabled] = useState(false);
-
     const [allContacts, setAllContact] = useState<ContactItem[]>([]);
 
     const { favoriteContacts, dispatch } = useContacts();
@@ -58,6 +60,22 @@ const ContactCard = () => {
         }
     };
 
+    const filterContacts = (text: string) => {
+        const result = allContacts.filter((contact) => {
+            return (
+                contact.contactName
+                    .toLowerCase()
+                    .search(text.toLocaleLowerCase()) != -1
+            );
+        });
+
+        if (!result) {
+            console.log("inga resultat");
+        }
+
+        setFilteredContacts(result);
+    };
+
     async function getAllContacts() {
         const { status } = await Contacts.requestPermissionsAsync();
         if (status === "granted") {
@@ -93,82 +111,39 @@ const ContactCard = () => {
                     }
                 }
                 setAllContact(newArray);
+                setFilteredContacts(newArray);
             }
         }
-        setButtonDisabled(true);
     }
-
-    const filterContacts = (text: string) => {
-        // console.log(allContacts);
-        //allContacts.
-        const result = allContacts.filter((contact) => {
-            return (
-                contact.contactName
-                    .toLowerCase()
-                    .search(text.toLocaleLowerCase()) != -1
-            );
-        });
-
-        setFilteredContacts(result);
-    };
-
-    console.log(filteredContacts);
-    //const [value, onChangeText] = React.useState("Useless Placeholder");
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.text}>ContactsScreen</Text>
-            <View style={styles.contactBtn}>
-                <Button
-                    disabled={contactButton}
-                    title="Hämta kontakter"
-                    onPress={() => getAllContacts()}
-                />
-            </View>
-            <TextInput
-                style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
-                onChangeText={(text) => filterContacts(text)}
-                //value={filterContacts.toString()}
+            <ContactButton
+                allContacts={allContacts}
+                getAllContacts={getAllContacts}
             />
-
+            <SearchBarContacts
+                allContacts={allContacts}
+                filterContacts={filterContacts}
+            />
             <FlatList
                 data={filteredContacts}
                 renderItem={({ item }) => {
                     return (
-                        <View style={styles.contactBox}>
-                            <Text
-                                onPress={() => addFavoriteContact(item)}
-                                style={styles.title}
-                            >
-                                {item.contactName}
-                            </Text>
-                        </View>
+                        <TouchableHighlight
+                            style={styles.contactBox}
+                            onPress={() => addFavoriteContact(item)}
+                        >
+                            <Text style={styles.title}>{item.contactName}</Text>
+                        </TouchableHighlight>
                     );
                 }}
                 keyExtractor={(contact) => contact.contactId}
-                extraData={allContacts}
             />
-            <Text style={styles.text}>FAVORITER</Text>
-
-            <ScrollView>
-                <FlatList
-                    data={favoriteContacts}
-                    style={styles.container}
-                    renderItem={({ item }) => {
-                        return (
-                            <ScrollView style={styles.contactBox}>
-                                <Text
-                                    onPress={() => removeFavoriteContact(item)}
-                                    style={styles.title}
-                                >
-                                    {item.contactName}
-                                </Text>
-                            </ScrollView>
-                        );
-                    }}
-                    keyExtractor={(contact) => contact.contactId}
-                />
-            </ScrollView>
+            <FavoriteContacts
+                favoriteContacts={favoriteContacts}
+                removeFavoriteContact={removeFavoriteContact}
+            />
         </SafeAreaView>
     );
 };
@@ -178,6 +153,7 @@ export default ContactCard;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        marginBottom: 8,
     },
     contactBox: {
         backgroundColor: "#fff",
@@ -190,11 +166,20 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 18,
-        width: "100%",
     },
-    contactBtn: {},
+    buttonStyle: {
+        marginTop: 8,
+    },
     text: {
         fontSize: 30,
         color: "white",
+    },
+    noFavorites: {
+        paddingHorizontal: 16,
+        paddingVertical: 8,
+        marginBottom: 10,
+        marginTop: 10,
+        display: "flex",
+        justifyContent: "center",
     },
 });
