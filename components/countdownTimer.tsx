@@ -9,7 +9,7 @@ import {
 import { Timer } from "react-native-stopwatch-timer";
 
 interface Props {
-    // onStart?: () => void;
+    // onStart?: () => void; REMOVE?
     handleTimerFinished: () => void;
     onStop: () => void;
 }
@@ -41,27 +41,26 @@ const CountdownTimer = ({ onStop, handleTimerFinished }: Props) => {
                         }}
                     />
                     <TouchableHighlight
+                        style={styles.pauseButton}
                         onPress={() => {
                             setIsTimerStart(!isTimerStart);
                             setResetTimer(false);
                         }}
                     >
-                        <Text style={[styles.pauseButton]}>
+                        <Text style={styles.pauseButtonText}>
                             {!isTimerStart ? "STARTA" : "PAUSA"}
                         </Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
-                        style={styles.marginTop}
+                        style={[styles.buttonText, styles.marginTop]}
                         onPress={() => {
                             setIsTimerStart(false);
                             setResetTimer(true);
                             onStop();
                         }}
                     >
-                        <Text style={[styles.buttonText, styles.StopText]}>
-                            Stoppa timer
-                        </Text>
+                        <Text style={[styles.StopText]}>STOPPA TIMER</Text>
                     </TouchableHighlight>
                 </View>
             </View>
@@ -91,7 +90,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginTop: 5,
         padding: 15,
-        borderRadius: 5,
+        borderRadius: 10,
         color: "#FFF",
         backgroundColor: "rgba(45, 155, 240, 0.4)",
         alignItems: "center",
@@ -99,20 +98,25 @@ const styles = StyleSheet.create({
     },
     pauseButton: {
         color: "#FFFF",
-        padding: 50,
-        marginTop: -40,
+        backgroundColor: "rgba(45, 155, 240, 0.4)",
+        padding: 5,
+        marginTop: 20,
+        borderRadius: 10,
     },
     StopText: {
         fontSize: 38,
+        color: "#FFF",
     },
     marginTop: {
         marginTop: 90,
+    },
+    pauseButtonText: {
+        color: "#FFF",
     },
 });
 
 const options = {
     container: {
-        // backgroundColor: "#2D9BF0",
         backgroundColor: "rgba(45, 155, 240, 0.3)",
         padding: 5,
         borderRadius: 200,

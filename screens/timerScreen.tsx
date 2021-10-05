@@ -27,13 +27,18 @@ function TimerScreen({ navigation }: Props) {
         const result = await SendSms(favoritNumbers, deviceName, deviceModel);
 
         if (result === "sent") {
-            navigation.navigate("EndTimerScreen");
+            //FÅ NOTIS
+            navigation.navigate("Hem");
         } else if (result === "unknown") {
-            navigation.navigate("EndTimerScreen");
+            //FÅ NOTIS
+            setTimeout(() => {
+                navigation.navigate("Hem");
+            }, 500);
         }
         // Cancelled / Unavaliable
         else {
             // TODO: What happens when the message could not be sent?
+            //FÅ NOTIS "MEDDELANDE HAR INTE SKICKATS"
             setTimeout(() => {
                 navigation.navigate("Hem");
             }, 500);
