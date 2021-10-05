@@ -12,6 +12,7 @@ import {
     View,
 } from "react-native";
 import { ContactItem, useContacts } from "../context/contactContext";
+import AllContacts from "./allContacts";
 import ContactButton from "./contactButton";
 import FavoriteContacts from "./favoriteContacts";
 import SearchBarContacts from "./searchBarContacts";
@@ -126,19 +127,10 @@ const ContactCard = () => {
                 allContacts={allContacts}
                 filterContacts={filterContacts}
             />
-            <FlatList
-                data={filteredContacts}
-                renderItem={({ item }) => {
-                    return (
-                        <TouchableHighlight
-                            style={styles.contactBox}
-                            onPress={() => addFavoriteContact(item)}
-                        >
-                            <Text style={styles.title}>{item.contactName}</Text>
-                        </TouchableHighlight>
-                    );
-                }}
-                keyExtractor={(contact) => contact.contactId}
+
+            <AllContacts
+                filteredContacts={filteredContacts}
+                addFavoriteContact={addFavoriteContact}
             />
             <FavoriteContacts
                 favoriteContacts={favoriteContacts}
