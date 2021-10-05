@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="024ae474-fa44-41ee-b213-9ad2fa5ab99f" name="Default Changelist" comment="">
+
+      <change beforePath="$PROJECT_DIR$/components/timerInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/timerInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/homePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/homePage.tsx" afterDir="false" />
+
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/countdownTimer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/countdownTimer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/smsSender.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/smsSender.tsx" afterDir="false" />
+
+      <change beforePath="$PROJECT_DIR$/screens/timerScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/screens/timerScreen.tsx" afterDir="false" />
+
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/contactsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/contactsPage.tsx" afterDir="false" />
@@ -16,6 +22,8 @@
       <change beforePath="$PROJECT_DIR$/pages/homePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/homePage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/informationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/informationPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/timerPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/timerPage.tsx" afterDir="false" />
+
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

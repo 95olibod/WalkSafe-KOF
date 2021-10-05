@@ -7,32 +7,14 @@ import {
     View,
 } from "react-native";
 import { Timer } from "react-native-stopwatch-timer";
-import { useContacts } from "../context/contactContext";
-import { CheckSmsAvailability } from "./smsSender";
-import * as Device from "expo-device";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../navigators/RootStackNavigator";
 
-type Props = NativeStackScreenProps<RootStackParamList, "Kontakter">;
+interface Props {
+    // onStart?: () => void; REMOVE?
+    handleTimerFinished: () => void;
+    onStop: () => void;
+}
 
-const CountdownTimer = ({ navigation }: Props) => {
-    const { favoriteContacts, dispatch } = useContacts();
-
-    async function handlePress() {
-        let deviceName = Device.deviceName;
-        let deviceModel: string = Device.modelId;
-        if (deviceName === null) {
-            deviceName = "namn okänt";
-        }
-        if (!deviceModel) {
-            deviceModel = "okänd enhet";
-        }
-        const favoritNumbers = favoriteContacts.map(
-            (contact) => contact.phoneNumber
-        );
-        await CheckSmsAvailability(favoritNumbers, deviceName, deviceModel);
-    }
-
+const CountdownTimer = ({ onStop, handleTimerFinished }: Props) => {
     const [isTimerStart, setIsTimerStart] = useState(false);
 
     const [timerDuration, setTimerDuration] = useState(3 * 1000);
@@ -44,54 +26,42 @@ const CountdownTimer = ({ navigation }: Props) => {
             <View style={styles.container}>
                 <View style={styles.sectionStyle}>
                     <Timer
+                        //Time Duration
                         totalDuration={timerDuration}
                         msecs2
-                        //Time Duration
-                        start={isTimerStart}
                         //To start
-                        reset={resetTimer}
+                        start={isTimerStart}
                         //To reset
-                        options={options}
+                        reset={resetTimer}
                         //options for the styling
+                        options={options}
+                        //if finished
                         handleFinish={() => {
-                            handlePress();
-                            //alert("message sent...");
+                            handleTimerFinished();
                         }}
-                        //can call a function On finish of the time
-                        // getTime={(time) => {
-                        //   console.log(time);
-                        // }}
                     />
                     <TouchableHighlight
+                        style={styles.pauseButton}
                         onPress={() => {
                             setIsTimerStart(!isTimerStart);
                             setResetTimer(false);
                         }}
                     >
-                        <Text style={[styles.pauseButton]}>
+                        <Text style={styles.pauseButtonText}>
                             {!isTimerStart ? "STARTA" : "PAUSA"}
                         </Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight
-                        style={styles.marginTop}
+                        style={[styles.buttonText, styles.marginTop]}
                         onPress={() => {
                             setIsTimerStart(false);
                             setResetTimer(true);
-                            //KOLLA DENNA
-                            // navigation.navigate("EndTimerScreen");
+                            onStop();
                         }}
                     >
-                        <Text
-                            style={[styles.buttonText, styles.StopText]}
-                            //   onPress={() => onSetPage("endPage")}
-                        >
-                            Stoppa timer
-                        </Text>
+                        <Text style={[styles.StopText]}>STOPPA TIMER</Text>
                     </TouchableHighlight>
-                    {/* <Button title="GÅ HEM" onPress={() => onSetPage("home")}>
-                        STOPP
-                    </Button> */}
                 </View>
             </View>
         </SafeAreaView>
@@ -120,7 +90,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginTop: 5,
         padding: 15,
-        borderRadius: 5,
+        borderRadius: 10,
         color: "#FFF",
         backgroundColor: "rgba(45, 155, 240, 0.4)",
         alignItems: "center",
@@ -128,20 +98,25 @@ const styles = StyleSheet.create({
     },
     pauseButton: {
         color: "#FFFF",
-        padding: 50,
-        marginTop: -40,
+        backgroundColor: "rgba(45, 155, 240, 0.4)",
+        padding: 5,
+        marginTop: 20,
+        borderRadius: 10,
     },
     StopText: {
         fontSize: 38,
+        color: "#FFF",
     },
     marginTop: {
         marginTop: 90,
+    },
+    pauseButtonText: {
+        color: "#FFF",
     },
 });
 
 const options = {
     container: {
-        // backgroundColor: "#2D9BF0",
         backgroundColor: "rgba(45, 155, 240, 0.3)",
         padding: 5,
         borderRadius: 200,

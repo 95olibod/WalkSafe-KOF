@@ -1,6 +1,5 @@
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import HomeScreen from "../screens/homeScreen";
 import EndTimerScreen from "../screens/endTimerScreen";
@@ -23,7 +22,7 @@ const MyTheme = {
     ...DefaultTheme,
     colors: {
         ...DefaultTheme.colors,
-        background: "red",
+        backgroundColor: "transparent",
     },
     root: {
         marginTop: 500,
@@ -35,15 +34,20 @@ const MyTheme = {
 
 export default function RootStackNavigator() {
     return (
-        <NavigationContainer theme={MyTheme}>
+        <NavigationContainer>
             <Stack.Navigator
-                screenOptions={
-                    {
-                        //headerStyle: { backgroundColor: "red" }
-                        // headerTransparent: true, // denna vill vi kanske ha
-                        // containedTransparentModal: true
-                    }
-                }
+                screenOptions={{
+                    headerStyle: {
+                        backgroundColor: "transparent",
+                    },
+                    contentStyle: { backgroundColor: "transparent" },
+                    headerTitleAlign: "center",
+                    headerTitleStyle: { color: "white" },
+                    headerTintColor: "white",
+                    //headerStyle: { backgroundColor: "red" }
+                    // headerTransparent: true, // denna vill vi kanske ha
+                    // containedTransparentModal: true
+                }}
             >
                 <Stack.Screen name="Hem" component={HomeScreen} />
                 <Stack.Screen
