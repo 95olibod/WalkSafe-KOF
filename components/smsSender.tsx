@@ -14,10 +14,11 @@ export async function SendSms(
   battery: number,
   locationLongitude: number,
   locationLatitude: number,
+  userText: string | undefined,
 ) {
   const isAvailable: boolean = await SMS.isAvailableAsync();
   if (isAvailable) {
-    const message = messageoutput(deviceName, deviceModel, battery, locationLongitude, locationLatitude)
+    const message = messageoutput(deviceName, deviceModel, battery, locationLongitude, locationLatitude, userText)
     const { result } = await SMS.sendSMSAsync(favoritNumbers, message);
 
     return result;
@@ -29,11 +30,17 @@ export async function SendSms(
 
 // Message to sent to recipientList (should be const)
 
-const messageoutput = (deviceName: string | undefined, deviceModel: string | undefined, battery: number, locationLongitude: number, locationLatitude: number) => { 
+const messageoutput = (deviceName: string | undefined, deviceModel: string | undefined, battery: number, locationLongitude: number, locationLatitude: number, userText: string | undefined) => { 
 
-  const warningMessage = "NÖDANROP! skickat via Walk Safe" + "\n\n";
 
-  const userMessage = "(Här finns text från användare)" + "\n\n";
+    const warningIntro = "NÖDANROP! skickat via Walk Safe" + "\n\n";
+    const warningInfo = `Detta är ett nöd sms som skickas till dig av anledning till att någon på enheten  ${deviceName} INTE har avbrutit sin säker hemgång timer via Walk Safe. Denna person kan vara i fara!\n\n Personligt meddelande:\n`;
+    const warningMessage = warningIntro + warningInfo;
+    if(userText === undefined){
+        userText = "Hej, jag skickar detta till dig i fall att jag inte kommer hem säkert"
+    }
+
+  const userMessage = `${userText}\n\n`;
 
   const deviceUnit = `Enhet - ${deviceModel}, - ${deviceName}:\n`;
   const batteryLevel = ` - Batteri: ${battery}%\n`;

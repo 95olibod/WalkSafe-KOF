@@ -17,7 +17,8 @@ interface ContextValue {
   locationLatitude: number;
   deviceName: string | undefined;
   deviceModel: string | undefined;
-  //   userText: string;
+  setUserInputText: (text: string) => void;
+    userText: string| undefined;
   setTimerInputFromUser: (minutes: number) => void;
   timerInput: number;
 
@@ -30,7 +31,8 @@ export const DeviceContext = createContext<ContextValue>({
   locationLatitude: 0,
   deviceName: "",
   deviceModel: "",
-  //   userText: "",
+  setUserInputText: () => {},
+    userText: "",
   setTimerInputFromUser: () => {},
   timerInput: 0,
 });
@@ -42,7 +44,7 @@ const DeviceProvider: FC = ({ children }) => {
   const [LocationErrorMsg, setLocationErrorMsg] = useState<string>(""); // ska vi ha med?
   const [deviceName, setdeviceName] = useState<string>();
   const [deviceModel, setdeviceModel] = useState<string>();
-  //   const [userText, setUserText] = useState<string>();
+    const [userText, setUserText] = useState<string>();
   const [timerInput, setTimerInput] = useState<number>(0);
 
   // BATTERY
@@ -90,9 +92,9 @@ const DeviceProvider: FC = ({ children }) => {
 
   // USER TEXT
 
-  //   const setUserInputText = (userMessage: string) => {
-  //       setUserText(userMessage);
-  //   };
+    const setUserInputText = (userMessage: string) => {
+        setUserText(userMessage);
+    };
 
   // TIMER INPUT
 
@@ -110,7 +112,8 @@ const DeviceProvider: FC = ({ children }) => {
         locationLatitude,
         deviceName,
         deviceModel,
-        // userText,
+        setUserInputText,
+        userText,
         setTimerInputFromUser,
         timerInput
       }}
