@@ -1,16 +1,22 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import * as Device from "expo-device";
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, View } from "react-native";
 import CountdownTimer from "../components/countdownTimer";
 import { SendSms } from "../components/smsSender";
 import { useContacts } from "../context/contactContext";
+import { DeviceContext } from "../context/deviceContext";
 import { RootStackParamList } from "../navigators/RootStackNavigator";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Timer">;
 
 function TimerScreen({ navigation }: Props) {
-    const { favoriteContacts } = useContacts();
+
+    const { batteryLevel } = useContext(DeviceContext);
+
+
+  
+    const { favouriteContacts } = useContacts();
 
     async function handleTimerFinished() {
         let deviceName = Device.deviceName;
@@ -21,10 +27,10 @@ function TimerScreen({ navigation }: Props) {
         if (!deviceModel) {
             deviceModel = "okänd enhet";
         }
-        const favoritNumbers = favoriteContacts.map(
+        const favoritNumbers = favouriteContacts.map(
             (contact) => contact.phoneNumber
         );
-        const result = await SendSms(favoritNumbers, deviceName, deviceModel);
+        const result = await SendSms(favoritNumbers, deviceName, deviceModel, batteryLevel);
 
         if (result === "sent") {
             //FÅ NOTIS

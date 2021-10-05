@@ -4,10 +4,10 @@ import { ContactItem } from "../context/contactContext";
 
 interface Props {
     filteredContacts: ContactItem[];
-    addFavoriteContact: (item: ContactItem) => void;
+    addFavouriteContact: (item: ContactItem) => void;
 }
 
-const AllContacts = ({ filteredContacts, addFavoriteContact }: Props) => {
+const AllContacts = ({ filteredContacts, addFavouriteContact }: Props) => {
     return (
         <FlatList
             data={filteredContacts}
@@ -15,7 +15,7 @@ const AllContacts = ({ filteredContacts, addFavoriteContact }: Props) => {
                 return (
                     <TouchableHighlight
                         style={styles.contactBox}
-                        onPress={() => addFavoriteContact(item)}
+                        onPress={() => addFavouriteContact(item)}
                     >
                         <Text style={styles.title}>{item.contactName}</Text>
                     </TouchableHighlight>

@@ -6,14 +6,23 @@ import ContactCard from "../components/contactCard";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigators/RootStackNavigator";
 
-// interface Props {
-//     onGoBack: () => void;
-//     onSetPage: (page: string) => void;
-// }
-
 type Props = NativeStackScreenProps<RootStackParamList, "Kontakter">;
 
 const ContactsPage = ({ navigation }: Props) => {
+
+    const { favouriteContacts} = useContacts();
+
+    //TODO:
+    // const showInformationButton = () => {
+    //   if (favouriteContacts.length > 0)
+    //     return (
+    //       <Button
+    //         title="Gå till information"
+    //         onPress={() => navigation.navigate("Information")}
+    //       ></Button>
+    //     );
+    // };
+  
     return (
         <View style={styles.contentContainer}>
             {/* <Button title="Gå tillbaka" onPress={onGoBack}></Button> */}
@@ -22,6 +31,7 @@ const ContactsPage = ({ navigation }: Props) => {
                     title="Gå till information"
                     onPress={() => navigation.navigate("Information")}
                 ></Button>
+               
             </View>
             <ContactCard />
         </View>

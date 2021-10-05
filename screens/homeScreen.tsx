@@ -2,9 +2,10 @@ import React from "react";
 import { Button, View, StyleSheet, Text } from "react-native";
 import CountdownTimer from "../components/countdownTimer";
 import LocationFunc from "../components/location";
-import Battery from "../components/battery";
+import Battery from "../context/deviceContext";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigators/RootStackNavigator";
+import TimerInput from "../components/timerInput";
 
 // interface Props {
 //   onSetPage: (page: string) => void;
@@ -16,11 +17,7 @@ function HomePage({ navigation }: Props) {
     return (
         <View style={styles.container}>
             <View>
-                <Text style={styles.text}>HOME PAGE</Text>
-                <Button
-                    title="Klicka för hjälp"
-                    onPress={() => alert("HJÄLP")}
-                ></Button>
+                <TimerInput/>
                 <Button
                     title="GÅ vidare till kontakter"
                     onPress={() => navigation.navigate("Kontakter")}

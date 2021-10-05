@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
     SafeAreaView,
     StyleSheet,
@@ -7,6 +7,7 @@ import {
     View,
 } from "react-native";
 import { Timer } from "react-native-stopwatch-timer";
+import { DeviceContext } from "../context/deviceContext";
 
 interface Props {
     // onStart?: () => void; REMOVE?
@@ -15,6 +16,7 @@ interface Props {
 }
 
 const CountdownTimer = ({ onStop, handleTimerFinished }: Props) => {
+
     const [isTimerStart, setIsTimerStart] = useState(false);
 
     const [timerDuration, setTimerDuration] = useState(3 * 1000);

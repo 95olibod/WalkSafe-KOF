@@ -8,7 +8,7 @@ export interface ContactItem {
 }
 
 interface ContextValue {
-  favoriteContacts: ContactItem[];
+  favouriteContacts: ContactItem[];
   dispatch: React.Dispatch<ContactAction>;
 }
 
@@ -17,11 +17,11 @@ const ContactContext = createContext<ContextValue>({} as any);
 const ContactsProvider: FC = ({ children }) => {
   
   //Define state
-  const [favoriteContacts, dispatch] = useReducer(contactReducer, []);
+  const [favouriteContacts, dispatch] = useReducer(contactReducer, []);
   return (
     <ContactContext.Provider
       value={{
-        favoriteContacts,
+        favouriteContacts,
         dispatch,
       }}
     >
