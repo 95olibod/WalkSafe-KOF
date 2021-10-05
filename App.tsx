@@ -7,7 +7,6 @@ import {
     View,
     Image,
     SafeAreaView,
-    ScrollView,
 } from "react-native";
 import HomePage from "./screens/homeScreen";
 import TimerScreen from "./screens/timerScreen";
@@ -26,8 +25,8 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 export default function App() {
     return (
         <ContactsProvider>
-            <StatusBar style="auto" />
             <SafeAreaProvider style={styles.root}>
+                <StatusBar style="light" />
                 <ImageBackground
                     source={image}
                     resizeMode="cover"
@@ -44,7 +43,7 @@ export default function App() {
 const styles = StyleSheet.create({
     root: {
         flex: 1,
-        marginBottom: 100,
+        //marginBottom: 100,
     },
     container: {
         flex: 1,

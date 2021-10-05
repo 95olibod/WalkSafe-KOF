@@ -4,29 +4,27 @@ import { RootStackParamList } from "../navigators/RootStackNavigator";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Hem">;
 
-export async function CheckSmsAvailability(
+export async function SendSms(
     favoritNumbers: string[],
     deviceName: string,
     deviceModel: string
 ) {
     const isAvailable: boolean = await SMS.isAvailableAsync();
     if (isAvailable) {
-        // do your SMS stuff here
+        const message = messageoutput(deviceName, deviceModel);
+        const { result } = await SMS.sendSMSAsync(favoritNumbers, message);
 
-        SendSms(favoritNumbers, deviceName, deviceModel);
-        return "Message sent";
+        return result;
     } else {
         // misfortune... there's no SMS available on this device
-        return "Unable to send message";
+        return "unavailable";
     }
 }
 
-// List containing Recipients of alarm message
-
-// Message to sent to recipientList (should be chonst)
+// Message to sent to recipientList (should be const)
 
 const messageoutput = (deviceName: string, deviceModel: string) => {
-    const varningMessage = "NÖDANROP! skickat via Walk Safe" + "\n\n";
+    const warningMessage = "NÖDANROP! skickat via Walk Safe" + "\n\n";
 
     const userMessage = "(Här finns text från användare)" + "\n\n";
 
@@ -38,40 +36,7 @@ const messageoutput = (deviceName: string, deviceModel: string) => {
     const deviceInfo = battery + location + active;
 
     const completeMessage =
-        varningMessage + userMessage + deviceUnit + deviceInfo;
+        warningMessage + userMessage + deviceUnit + deviceInfo;
+
     return completeMessage;
 };
-
-export async function SendSms(
-    favoritNumbers: string[],
-    deviceName: string,
-    deviceModel: string
-) {
-    let messageToSend: string;
-    let message: string = messageoutput(deviceName, deviceModel);
-    const { result } = await SMS.sendSMSAsync(
-        favoritNumbers,
-        (messageToSend = message)
-    );
-
-    //KOLLA DENNA
-    console.log(result);
-
-    if (result === "sent") {
-        alert("HE IS COMING FOR YOU");
-
-        //NAVIGATE TO HEM  
-    }
-
-    if (result === "unknown") {
-        () => {
-            alert("Sms skickat");
-        };
-    }
-
-    if (result === "cancelled") {
-        () => {
-            alert("du avbröt sms, och kommer nu inte att få hjälp");
-        };
-    }
-}

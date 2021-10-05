@@ -7,32 +7,14 @@ import {
     View,
 } from "react-native";
 import { Timer } from "react-native-stopwatch-timer";
-import { useContacts } from "../context/contactContext";
-import { CheckSmsAvailability } from "./smsSender";
-import * as Device from "expo-device";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../navigators/RootStackNavigator";
 
-type Props = NativeStackScreenProps<RootStackParamList, "Kontakter">;
+interface Props {
+    // onStart?: () => void;
+    handleTimerFinished: () => void;
+    onStop: () => void;
+}
 
-const CountdownTimer = ({ navigation }: Props) => {
-    const { favoriteContacts, dispatch } = useContacts();
-
-    async function handlePress() {
-        let deviceName = Device.deviceName;
-        let deviceModel: string = Device.modelId;
-        if (deviceName === null) {
-            deviceName = "namn okänt";
-        }
-        if (!deviceModel) {
-            deviceModel = "okänd enhet";
-        }
-        const favoritNumbers = favoriteContacts.map(
-            (contact) => contact.phoneNumber
-        );
-        await CheckSmsAvailability(favoritNumbers, deviceName, deviceModel);
-    }
-
+const CountdownTimer = ({ onStop, handleTimerFinished }: Props) => {
     const [isTimerStart, setIsTimerStart] = useState(false);
 
     const [timerDuration, setTimerDuration] = useState(3 * 1000);
@@ -44,23 +26,19 @@ const CountdownTimer = ({ navigation }: Props) => {
             <View style={styles.container}>
                 <View style={styles.sectionStyle}>
                     <Timer
+                        //Time Duration
                         totalDuration={timerDuration}
                         msecs2
-                        //Time Duration
-                        start={isTimerStart}
                         //To start
-                        reset={resetTimer}
+                        start={isTimerStart}
                         //To reset
-                        options={options}
+                        reset={resetTimer}
                         //options for the styling
+                        options={options}
+                        //if finished
                         handleFinish={() => {
-                            handlePress();
-                            //alert("message sent...");
+                            handleTimerFinished();
                         }}
-                        //can call a function On finish of the time
-                        // getTime={(time) => {
-                        //   console.log(time);
-                        // }}
                     />
                     <TouchableHighlight
                         onPress={() => {
@@ -78,20 +56,13 @@ const CountdownTimer = ({ navigation }: Props) => {
                         onPress={() => {
                             setIsTimerStart(false);
                             setResetTimer(true);
-                            //KOLLA DENNA
-                            // navigation.navigate("EndTimerScreen");
+                            onStop();
                         }}
                     >
-                        <Text
-                            style={[styles.buttonText, styles.StopText]}
-                            //   onPress={() => onSetPage("endPage")}
-                        >
+                        <Text style={[styles.buttonText, styles.StopText]}>
                             Stoppa timer
                         </Text>
                     </TouchableHighlight>
-                    {/* <Button title="GÅ HEM" onPress={() => onSetPage("home")}>
-                        STOPP
-                    </Button> */}
                 </View>
             </View>
         </SafeAreaView>
