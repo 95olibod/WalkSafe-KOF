@@ -47,6 +47,9 @@ const DeviceProvider: FC = ({ children }) => {
     const [userText, setUserText] = useState<string>();
   const [timerInput, setTimerInput] = useState<number>(0);
 
+  const [startLocation, getStartLocation] = useState<string>(); // dessa två ska vara med va? eller skiter vi i det, kanske bara ska ha dom som strängar/inputfält?
+  const [destination, getDestination] = useState<string>();
+
   // BATTERY
 
   useEffect(() => {
