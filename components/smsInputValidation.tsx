@@ -34,7 +34,8 @@ export default function SmsInputValidation() {
                     <>
                         <SmsMessageInput
                             multiline={true}
-                            numberOfLines={1}
+                            numberOfLines={4}
+                            textAlignVertical="top"
                             label="Personligt meddelande"
                             value={values.message}
                             onChangeText={handleChange<keyof Post>('message')}
@@ -53,7 +54,7 @@ export default function SmsInputValidation() {
 
 const style = StyleSheet.create({
     container: {
-        // width: "100%",
+        width: "100%",
         alignItems: 'center',
         justifyContent: 'center',
         padding: 16,

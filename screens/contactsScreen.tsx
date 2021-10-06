@@ -1,31 +1,36 @@
 import * as Contacts from "expo-contacts";
 import React, { useState } from "react";
-import { Button, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, View } from "react-native";
 import { ContactItem, useContacts } from "../context/contactContext";
 import ContactCard from "../components/contactCard";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../navigators/RootStackNavigator";
 
-interface Props {
-    onGoBack: () => void;
-    onSetPage: (page: string) => void;
-}
+// interface Props {
+//     onGoBack: () => void;
+//     onSetPage: (page: string) => void;
+// }
 
-const ContactsPage = ({ onGoBack, onSetPage }: Props) => {
+type Props = NativeStackScreenProps<RootStackParamList, "Kontakter">;
+
+const ContactsPage = ({ navigation }: Props) => {
     return (
-        <ScrollView style={styles.contentContainer}>
-            <Button title="Gå tillbaka" onPress={onGoBack}></Button>
-            <Button
-                title="Gå till information"
-                onPress={() => onSetPage("information")}
-            ></Button>
+        <View style={styles.contentContainer}>
+            {/* <Button title="Gå tillbaka" onPress={onGoBack}></Button> */}
+            <View style={styles.buttonStyle}>
+                <Button
+                    title="Gå till information"
+                    onPress={() => navigation.navigate("Information")}
+                ></Button>
+            </View>
             <ContactCard />
-        </ScrollView>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "green",
     },
     text: {
         color: "white",
@@ -55,6 +60,9 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 32,
+    },
+    buttonStyle: {
+        marginTop: 8,
     },
 });
 

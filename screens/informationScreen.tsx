@@ -1,41 +1,40 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
-import { View, Text, Button, SafeAreaView, StyleSheet } from "react-native";
+import { View, Text, Button, StyleSheet } from "react-native";
+import { RootStackParamList } from "../navigators/RootStackNavigator";
 import InformationSwitches from "../components/informationSwitches"
 import SmsInputValidation from "../components/smsInputValidation";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-interface Props {
-    onGoBack: () => void;
-    onSetPage: (page: string) => void;
-}
+type Props = NativeStackScreenProps<RootStackParamList, "Kontakter">;
 
-const InformationPage = ({onGoBack, onSetPage}: Props) => {
+const InformationScreen = ({ navigation }: Props) => {
 
     return(
         <SafeAreaView style={style.container}>
-            <View>
                 <Text style={style.textstyle}>INFORMATION page</Text>
                 {/* <Button title="Gå tillbaka hem" onPress={onGoBack}></Button> */}
-                <Button
+                {/* <Button
                 title="gå tillbaka till contacts"
                 onPress={() => onSetPage("contacts")}
-            ></Button>
+            ></Button> */}
                 <Text style={style.textstyle}>Inkludera i SMS utsick</Text>
                 <InformationSwitches/>
                 <SmsInputValidation/>
                 <Button
-                title="gå till timer"
-                onPress={() => onSetPage("timer")}
+                title="Sätt timer"
+                onPress={() => navigation.navigate("Timer")}
             ></Button>
-            </View>
         </SafeAreaView>
     )
 }
   
-export default InformationPage;
+export default InformationScreen;
 
 const style = StyleSheet.create ({
     container: {
         height: "100%",
+        width: "100%",
         alignItems: 'center',
     },
     textstyle: {
@@ -45,4 +44,3 @@ const style = StyleSheet.create ({
         alignSelf: 'center',
     },
 });
-
