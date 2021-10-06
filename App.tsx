@@ -21,10 +21,12 @@ import KofaLogo from "./public/images/logoWalkSafe.png";
 import ContactsProvider from "./context/contactContext";
 import RootStackNavigator from "./navigators/RootStackNavigator";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import InformationProvider from "./context/informationContext";
 
 export default function App() {
     return (
         <ContactsProvider>
+          <InformationProvider>
             <SafeAreaProvider style={styles.root}>
                 <StatusBar style="light" />
                 <ImageBackground
@@ -36,6 +38,7 @@ export default function App() {
                     {/* <Image source={KofaLogo} style={styles.logo}></Image> */}
                 </ImageBackground>
             </SafeAreaProvider>
+          </InformationProvider>
         </ContactsProvider>
     );
 }
