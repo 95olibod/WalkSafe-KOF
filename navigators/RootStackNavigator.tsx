@@ -18,19 +18,19 @@ export type RootStackParamList = {
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const MyTheme = {
-    ...DefaultTheme,
-    colors: {
-        ...DefaultTheme.colors,
-        backgroundColor: "transparent",
-    },
-    root: {
-        marginTop: 500,
-    },
-    // header: {
-    //     marginTop: Constants.statusBarHeight
-    // },
-};
+// const MyTheme = {
+//     ...DefaultTheme,
+//     colors: {
+//         ...DefaultTheme.colors,
+//         backgroundColor: "transparent",
+//     },
+//     root: {
+//         marginTop: 500,
+//     },
+//     // header: {
+//     //     marginTop: Constants.statusBarHeight
+//     // },
+// };
 
 export default function RootStackNavigator() {
     return (
@@ -55,10 +55,11 @@ export default function RootStackNavigator() {
                     component={InformationScreen}
                 />
                 <Stack.Screen name="Kontakter" component={ContactsScreen} />
-                <Stack.Screen name="Timer" component={TimerScreen} />
+                <Stack.Screen name="Timer" component={TimerScreen} options={{ headerBackVisible: false }} />
                 <Stack.Screen
                     name="EndTimerScreen"
                     component={EndTimerScreen}
+                    options={{ headerBackVisible: false }}
                 />
             </Stack.Navigator>
         </NavigationContainer>

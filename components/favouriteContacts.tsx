@@ -19,7 +19,7 @@ const FavouriteContacts = ({
 }: Props) => {
     if (favouriteContacts.length > 0) {
         return (
-            <View>
+            <View style={{ flex: 1 }}>
                 <Text style={styles.text}>Favoriter</Text>
                 <FlatList
                     data={favouriteContacts}
