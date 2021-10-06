@@ -1,38 +1,47 @@
-import { createContext, FC, useContext, useState } from "react";
+import React, { createContext, FC, useContext, useState } from "react";
 
 export interface ActiveInfo {
     locationComponent: boolean;
-    batteri: boolean;
+    battery: boolean;
 }
 
 interface ContextValue {
     activeList: ActiveInfo[];
     toggleLocationSwitch: () => void;
-    toggleBatteriSwitch: () => void;
+    toggleBatterySwitch: () => void;
+    includeLocation: boolean;
+    includeBattery: boolean
 }
 
-export const InformationContext = createContext<ContextValue>({toggleLocationSwitch: () => {}, toggleBatteriSwitch: () => {}, activeList: []});
+export const InformationContext = createContext<ContextValue>({
+    toggleLocationSwitch: () => {}, 
+    toggleBatterySwitch: () => {}, 
+    activeList: [],
+    includeLocation: false,
+    includeBattery: false
+});
 
 const InformationProvider: FC = ({ children }) => {
 
-    const [addLocation, setAddLocation] = useState(false);
-    const [addBatteri, setAddBatteri] = useState(false);
+    const [includeLocation, setIncludeLocation] = useState(false);
+    const [includeBattery, setIncludeBattery] = useState(false);
 
-    const toggleLocationSwitch = () => setAddLocation(previousState => !previousState);
-    const toggleBatteriSwitch = () => setAddBatteri(previousState => !previousState);
+    const toggleLocationSwitch = () => setIncludeLocation(previousState => !previousState);
+    const toggleBatteriSwitch = () => setIncludeBattery(previousState => !previousState);
 
     return (
         <InformationContext.Provider
             value={{
                 toggleLocationSwitch,
-                toggleBatteriSwitch,
-                activeList: []
+                toggleBatterySwitch: toggleBatteriSwitch,
+                activeList: [],
+                includeBattery: includeBattery,
+                includeLocation
+
             }}
         >
             {children}
         </InformationContext.Provider>
     )
 }
-
-export const useInformation = () => useContext(InformationContext);
 export default InformationProvider;

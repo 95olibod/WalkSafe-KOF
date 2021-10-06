@@ -20,48 +20,51 @@ import LocationFunc from "./components/location";
 
 import KofaLogo from "./public/images/logoWalkSafe.png";
 import ContactsProvider from "./context/contactContext";
+import InformationProvider from "./context/informationContext";
 
 export default function App() {
-    const [page, setPage] = useState("home");
-    const goHome = () => setPage("home");
-    // const goBack = () => setPage(prevstate => { return {...prevstate}); FIX LATER. EN GUBBE PÅ DET
+  const [page, setPage] = useState("home");
+  const goHome = () => setPage("home");
+  // const goBack = () => setPage(prevstate => { return {...prevstate}); FIX LATER. EN GUBBE PÅ DET
 
-    const selectedPage = () => {
-        switch (page) {
-            case "home":
-                return <HomePage onSetPage={setPage} />;
-            // return <LoginPage color="green" />;
-            case "contacts":
-                return <ContactsPage onGoBack={goHome} onSetPage={setPage} />;
-            case "information":
-                return (
-                    <InformationPage onGoBack={goHome} onSetPage={setPage} />
-                );
-            case "timer":
-                return <TimerPage onSetPage={setPage} />;
-            case "endPage":
-                return <EndTimerPage onSetPage={setPage} />;
-        }
-    };
+  const selectedPage = () => {
+    switch (page) {
+      case "home":
+        return <HomePage onSetPage={setPage} />;
+      // return <LoginPage color="green" />;
+      case "contacts":
+        return <ContactsPage onGoBack={goHome} onSetPage={setPage} />;
+      case "information":
+        return (
+          <InformationPage onGoBack={goHome} onSetPage={setPage} />
+        );
+      case "timer":
+        return <TimerPage onSetPage={setPage} />;
+      case "endPage":
+        return <EndTimerPage onSetPage={setPage} />;
+    }
+  };
 
-    return (
-        <ContactsProvider>
-            <View style={styles.container}>
-                <StatusBar style="auto" />
-                {/* <Image source={image}/> */}
-                <ImageBackground
-                    source={image}
-                    resizeMode="cover"
-                    style={styles.image}
-                >
-                  <View style={styles.contentContainer}>
-                    <Image source={KofaLogo} style={styles.logo}></Image>
-                  </View>                       
-                   <View>{selectedPage()}</View>
-                </ImageBackground>
-              </View>
-        </ContactsProvider>
-    );
+  return (
+    <ContactsProvider>
+      <InformationProvider>
+        <View style={styles.container}>
+          <StatusBar style="auto" />
+          {/* <Image source={image}/> */}
+          <ImageBackground
+            source={image}
+            resizeMode="cover"
+            style={styles.image}
+          >
+            <View style={styles.contentContainer}>
+              <Image source={KofaLogo} style={styles.logo}></Image>
+            </View>
+            <View>{selectedPage()}</View>
+          </ImageBackground>
+        </View>
+      </InformationProvider>
+    </ContactsProvider>
+  );
 }
 
 const styles = StyleSheet.create({
