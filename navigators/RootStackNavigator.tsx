@@ -7,6 +7,7 @@ import ContactsScreen from "../screens/contactsScreen";
 import InformationScreen from "../screens/informationScreen";
 import TimerScreen from "../screens/timerScreen";
 import Constants from "expo-constants";
+import KofaLogo from "../public/images/logoWalkSafe.png";
 
 export type RootStackParamList = {
     Hem: undefined;

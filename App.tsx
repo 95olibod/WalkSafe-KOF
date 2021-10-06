@@ -1,28 +1,17 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React from "react";
 import {
   ImageBackground,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  SafeAreaView,
+  StyleSheet
 } from "react-native";
-import HomeScreen from "./screens/homeScreen";
-import TimerScreen from "./screens/timerScreen";
-import ContactsPage from "./screens/contactsScreen";
-import InformationPage from "./screens/informationScreen";
-import image from "./public/images/background.jpeg";
-import EndTimerScreen from "./screens/endTimerScreen";
-
-import LocationFunc from "./components/location";
-
-import KofaLogo from "./public/images/logoWalkSafe.png";
-import ContactsProvider from "./context/contactContext";
-import RootStackNavigator from "./navigators/RootStackNavigator";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import ContactsProvider from "./context/contactContext";
 import DeviceProvider from "./context/deviceContext";
 import InformationProvider from "./context/informationContext";
+import RootStackNavigator from "./navigators/RootStackNavigator";
+import image from "./public/images/background.jpeg";
+
+
 
 export default function App() {
   return (
@@ -37,7 +26,7 @@ export default function App() {
             style={styles.image}
           >
             <RootStackNavigator />
-            {/* <Image source={KofaLogo} style={styles.logo}></Image> */}
+          {/* <Image source={KofaLogo} style={styles.logo}></Image> */}
           </ImageBackground>
         </SafeAreaProvider>
             </InformationProvider>

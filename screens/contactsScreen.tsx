@@ -1,6 +1,12 @@
 import * as Contacts from "expo-contacts";
 import React, { useState } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  View,
+} from "react-native";
 import { ContactItem, useContacts } from "../context/contactContext";
 import ContactCard from "../components/contactCard";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -13,23 +19,23 @@ const ContactsPage = ({ navigation }: Props) => {
 
   return (
     <View style={styles.contentContainer}>
-      {favouriteContacts.length > 0 ? (
-        <View style={styles.buttonStyle}>
-          <Button
-            title="Gå till information"
-            onPress={() => navigation.navigate("Information")}
-          ></Button>
-        </View>
-      ) : (
-        null
-      )}
       <ContactCard />
+      {favouriteContacts.length > 0 ? (
+        
+          <TouchableHighlight
+            style={[styles.button]}
+            onPress={() => navigation.navigate("Information")}
+          >
+            <Text style={[styles.buttonText]}>Gå vidare</Text>
+          </TouchableHighlight>
+        
+      ) : null}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  root: {
     flex: 1,
   },
   text: {
@@ -39,10 +45,6 @@ const styles = StyleSheet.create({
     marginRight: 30,
     marginLeft: 30,
     height: "100%",
-  },
-  cont: {
-    flex: 1,
-    paddingTop: 22,
   },
   sectionHeader: {
     paddingTop: 2,
@@ -61,8 +63,17 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
   },
-  buttonStyle: {
-    marginTop: 8,
+  button: {
+    backgroundColor: "rgba(45, 155, 240, 0.4)",
+    padding: 20,
+    borderRadius: 10,
+    alignItems: "center",
+    marginBottom: 30
+  },
+  buttonText: {
+    fontSize: 20,
+    fontWeight: "300",
+    color: "#fff",
   },
 });
 

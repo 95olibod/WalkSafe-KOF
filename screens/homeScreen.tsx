@@ -1,11 +1,17 @@
 import React, { useContext, useState } from "react";
-import { Button, View, StyleSheet, Text } from "react-native";
-import CountdownTimer from "../components/countdownTimer";
-import LocationFunc from "../components/location";
+import {
+  Button,
+  View,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+} from "react-native";
 import Battery, { DeviceContext } from "../context/deviceContext";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigators/RootStackNavigator";
 import TimerInput from "../components/timerInput";
+import KofaLogo from "../public/images/logoWalkSafe.png";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Kontakter">;
 
@@ -30,37 +36,44 @@ function HomeScreen({ navigation }: Props) {
     if (totalMinutes >= 1) {
       setTimerInputFromUser(totalMinutes * 60);
       navigation.navigate("Kontakter");
-    } 
+    }
   };
 
   return (
-    <View style={styles.container}>
-    {totalMinutes < 1 ?
+    <View style={styles.root}>
+      <View style={styles.viewContainer}>
+        {totalMinutes < 1 ? (
+          <Text style={styles.validationText}>
+            Timer måste minst ställas in på 1 minut
+          </Text>
+        ) : null}
 
-        <Text style={styles.validationText}>
-             Timer måste minst ställas in på 1 minut
-      </Text>
-      : null
-    }
-         
-      <TimerInput updateHours={updateHours} updateMinutes={updateMinutes} />
-
-      {totalMinutes > 0 ? (
-        <Button
-          title="GÅ vidare till kontakter"
+        <TimerInput updateHours={updateHours} updateMinutes={updateMinutes} />
+      </View>
+      <View>
+        {totalMinutes > 0 ? (
+          <TouchableHighlight
+          style={[styles.button]}
           onPress={() => handlePress()}
-        ></Button>
-      ) : null}
+        >
+          <Text style={[styles.buttonText]}>Gå vidare</Text>
+        </TouchableHighlight>
+        ) : null}
 
-      <Battery />
+        
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  root: {
     height: "100%",
     alignItems: "center",
+    justifyContent: "space-around",
+  },
+  viewContainer: {
+    alignItems: "center"
   },
   text: {
     color: "white",
@@ -69,6 +82,17 @@ const styles = StyleSheet.create({
     color: "#FFF",
     fontSize: 15,
   },
+  button: {
+    width: "100%",
+    backgroundColor: "rgba(45, 155, 240, 0.4)",
+    padding: 20,
+    borderRadius:10,
+  },
+  buttonText: {
+    fontSize:20,
+    fontWeight: "300",
+    color: "#fff"
+  }
 });
 
 export default HomeScreen;
