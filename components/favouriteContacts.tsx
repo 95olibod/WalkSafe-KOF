@@ -9,26 +9,26 @@ import {
 import { ContactItem } from "../context/contactContext";
 
 interface Props {
-    favoriteContacts: ContactItem[];
-    removeFavoriteContact: (item: ContactItem) => void;
+    favouriteContacts: ContactItem[];
+    removeFavouriteContact: (item: ContactItem) => void;
 }
 
-const FavoriteContacts = ({
-    favoriteContacts,
-    removeFavoriteContact,
+const FavouriteContacts = ({
+    favouriteContacts,
+    removeFavouriteContact,
 }: Props) => {
-    if (favoriteContacts.length > 0) {
+    if (favouriteContacts.length > 0) {
         return (
-            <View>
+            <View style={{ flex: 1 }}>
                 <Text style={styles.text}>Favoriter</Text>
                 <FlatList
-                    data={favoriteContacts}
+                    data={favouriteContacts}
                     style={styles.container}
                     renderItem={({ item }) => {
                         return (
                             <TouchableHighlight
                                 style={styles.contactBox}
-                                onPress={() => removeFavoriteContact(item)}
+                                onPress={() => removeFavouriteContact(item)}
                             >
                                 <Text style={styles.title}>
                                     {item.contactName}
@@ -42,13 +42,13 @@ const FavoriteContacts = ({
         );
     } else
         return (
-            <View style={styles.noFavorites}>
+            <View style={styles.noFavourites}>
                 <Text style={styles.text}>Favoriter</Text>
                 <Text style={styles.title}>Inga favoritkontakter valda</Text>
             </View>
         );
 };
-export default FavoriteContacts;
+export default FavouriteContacts;
 
 const styles = StyleSheet.create({
     container: {
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
         fontSize: 30,
         color: "white",
     },
-    noFavorites: {
+    noFavourites: {
         paddingHorizontal: 16,
         paddingVertical: 8,
         marginBottom: 10,

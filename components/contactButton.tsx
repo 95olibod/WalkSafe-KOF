@@ -17,7 +17,7 @@ const ContactButton = ({ allContacts, getAllContacts }: Props) => {
                 />
             </View>
         );
-    } else return <View></View>;
+    } else return null;
 };
 
 export default ContactButton;
