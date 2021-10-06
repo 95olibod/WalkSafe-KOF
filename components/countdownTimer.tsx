@@ -20,7 +20,7 @@ const CountdownTimer = ({ onStop, handleTimerFinished }: Props) => {
     const { timerInput } = useContext(DeviceContext);
 
 
-    const [isTimerStart, setIsTimerStart] = useState(false);
+    const [isTimerStart, setIsTimerStart] = useState(true);
 
     // const timerDuration = ((timerInput * 60) * 1000);
     const timerDuration = (timerInput * 1000);

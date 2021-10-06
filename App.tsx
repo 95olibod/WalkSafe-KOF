@@ -8,7 +8,7 @@ import {
   Image,
   SafeAreaView,
 } from "react-native";
-import HomePage from "./screens/homeScreen";
+import HomeScreen from "./screens/homeScreen";
 import TimerScreen from "./screens/timerScreen";
 import ContactsPage from "./screens/contactsScreen";
 import InformationPage from "./screens/informationScreen";

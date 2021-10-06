@@ -20,7 +20,7 @@ interface ContextValue {
   setUserInputText: (text: string) => void;
     userText: string| undefined;
   setTimerInputFromUser: (minutes: number) => void;
-  timerInput: number;
+  timerInput: number; //TA BORT
 
   //   timestamp: string;
 }
