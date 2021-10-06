@@ -11,16 +11,31 @@ import { RootStackParamList } from "../navigators/RootStackNavigator";
 type Props = NativeStackScreenProps<RootStackParamList, "Timer">;
 
 function TimerScreen({ navigation }: Props) {
+    const {
+        batteryLevel,
+        locationLongitude,
+        locationLatitude,
+        deviceName,
+        deviceModel,
+        userText,
+    } = useContext(DeviceContext);
 
-    const { batteryLevel, locationLongitude, locationLatitude, deviceName, deviceModel, userText } = useContext(DeviceContext);
-    
     const { favouriteContacts } = useContacts();
 
     async function handleTimerFinished() {
         const favoritNumbers = favouriteContacts.map(
             (contact) => contact.phoneNumber
         );
-        const result = await SendSms(favoritNumbers, deviceName, deviceModel, batteryLevel, locationLongitude, locationLatitude, userText);
+
+        const result = await SendSms(
+            favoritNumbers,
+            deviceName,
+            deviceModel,
+            batteryLevel,
+            locationLongitude,
+            locationLatitude,
+            userText
+        );
 
         if (result === "sent") {
             //FÅ NOTIS
