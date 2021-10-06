@@ -28,8 +28,7 @@ function HomeScreen({ navigation }: Props) {
 
     const handlePress = () => {
         if (totalMinutes >= 1) {
-            setTimerInputFromUser(totalMinutes);
-            // setTimerInputFromUser(totalMinutes * 60);
+            setTimerInputFromUser(totalMinutes * 60);
             navigation.navigate("Kontakter");
         }
     };
@@ -53,8 +52,6 @@ function HomeScreen({ navigation }: Props) {
                     onPress={() => handlePress()}
                 ></Button>
             ) : null}
-
-            <Battery />
         </View>
     );
 }
