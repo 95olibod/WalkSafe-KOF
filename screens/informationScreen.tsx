@@ -1,10 +1,11 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
-import { Text, Button, StyleSheet, TouchableHighlight } from "react-native";
+import { Text, Image, StyleSheet, TouchableHighlight } from "react-native";
 import { RootStackParamList } from "../navigators/RootStackNavigator";
 import InformationSwitches from "../components/informationSwitches"
 import SmsInputValidation from "../components/smsInputValidation";
 import { SafeAreaView } from "react-native-safe-area-context";
+import KofaLogo from "../public/images/logoWalkSafe.png";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Kontakter">;
 
@@ -12,13 +13,10 @@ const InformationScreen = ({ navigation }: Props) => {
 
     return(
         <SafeAreaView style={styles.root}>
-            <Text style={styles.textstyle}>Inkludera i SMS utsick</Text>
+            <Image source={KofaLogo} style={styles.logo}></Image>
+            <Text style={styles.textstyle}>Inkludera i SMS-utskick</Text>
             <InformationSwitches/>
             <SmsInputValidation/>
-            {/* <Button
-                title="Sätt timer"
-                onPress={() => navigation.navigate("Timer")}
-            ></Button> */}
             <TouchableHighlight
           style={[styles.button]}
           onPress={() => navigation.navigate("Timer")}
@@ -37,6 +35,12 @@ const styles = StyleSheet.create ({
         alignItems: "center",
         justifyContent: "space-between",
         marginHorizontal: 30,
+    },
+    logo: {
+        width: 110,
+        height: 70,
+        marginTop: -20,
+        alignSelf: "flex-end",
     },
     textstyle: {
         color: "white",

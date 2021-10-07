@@ -43,8 +43,6 @@ export default function SmsInputValidation() {
                             helperText={touched.message && errors.message}
                             onChange={() => handleSubmit()}
                         />
-
-                        {/* <Button title="Spara meddelandet" onPress={() => handleSubmit()} /> */}
                     </>
                 )}
             </Formik>
