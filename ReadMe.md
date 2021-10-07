@@ -78,6 +78,8 @@ Vi använder oss av en äldre timer som inte uppdaterats sedan 2017. Tanken fann
 
 Vi vill även att funktionen som skickar SMS ska göra detta automatiskt då timern gått ut. I nuläget behöver användaren själv trycka på skärmen för att ett SMS ska skickas. Dock har vi endast hittat betaltjänster som löser detta problem, men för att demonstrera hur detta eventuellt kan se ut valde vi att göra på detta sätt.
 
+Av ovan avgränsning kommer en notis ut innan sms är ivägskickat (enbart på simulator), Detta kommer att lösas i och med betaltjänst som senare ska kopplas in.
+
 Vi vill även omvandla angivna koordinater till adresser i stället. Likaså fält för att skriva in startposition och destination. Detta för att underlätta för de kontakter som mottager SMS.
 
 Vi har utgått från att utveckla appen att fungera på androidenheter i första hand, men har även i mån av tid försökt anpassa den för att även fungera för IOS.
