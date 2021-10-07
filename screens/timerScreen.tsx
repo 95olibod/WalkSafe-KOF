@@ -25,6 +25,7 @@ function TimerScreen({ navigation }: Props) {
         includeBattery,
         personalMessage,
         addPersonalMessage,
+        schedulePushNotification,
     } = useContext(InformationContext);
 
     const { favouriteContacts } = useContacts();
@@ -46,15 +47,15 @@ function TimerScreen({ navigation }: Props) {
             includeBattery
         );
 
-        addPersonalMessage("");
-
         if (result === "sent") {
             //FÅ NOTIS
             navigation.navigate("Hem");
+            schedulePushNotification();
         } else if (result === "unknown") {
             //FÅ NOTIS
             setTimeout(() => {
                 navigation.navigate("Hem");
+                schedulePushNotification();
             }, 500);
         }
         // Cancelled / Unavaliable
@@ -66,6 +67,7 @@ function TimerScreen({ navigation }: Props) {
                 navigation.navigate("Hem");
             }, 500);
         }
+        addPersonalMessage("");
     }
 
     return (
