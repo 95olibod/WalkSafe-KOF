@@ -70,3 +70,26 @@ Krav för väl godkänt:
 2. React Navigation används för att skapa en bättre upplevelse i appen. [JA]
 3. Ytterligare en valfri extern modul används i projektet. [JA]
 4. Prototyper för applikation tas fram innan den implementeras. Bilder på prototypen skall finnas i projektet vid inlämning. [JA]
+
+
+## Avgränsningar
+
+Vi använder oss av en äldre timer som inte uppdaterats sedan 2017. Tanken fanns att skriva en egen timer, men pga tidsbrist valde vi att behålla den befintliga. Denna timer medför varningsindikationer, men applikationen fungerar som den ska. I framtiden kommer egen timer läggas in.
+
+Vi vill även att funktionen som skickar SMS ska göra detta automatiskt då timern gått ut. I nuläget behöver användaren själv trycka på skärmen för att ett SMS ska skickas. Dock har vi endast hittat betaltjänster som löser detta problem, men för att demonstrera hur detta eventuellt kan se ut valde vi att göra på detta sätt.
+
+Vi vill även omvandla angivna koordinater till adresser i stället. Likaså fält för att skriva in startposition och destination. Detta för att underlätta för de kontakter som mottager SMS.
+
+Vi har utgått från att utveckla appen att fungera på androidenheter i första hand, men har även i mån av tid försökt anpassa den för att även fungera för IOS.
+Ett undantag för IOS är att sökfunktionen av kontakter inte fungerar för alla IOS enheter. Utöver detta är appen anpassad så att vare sig tycket faller mot IOS eller Android ska man kunna gå en säker promenad med Walk Safe.
+
+I utgångsläget fanns det även idéer om att ta med en lång rad andra funktioner i appen. Dessa innefattar bland annat:
+- Att kunna sätta ut position samt slutdestination med karta
+- Skicka med länk i sms till karta över nuvarande position
+- Känna av när telefonen senast var i rörelse
+- Känna av när telefonen sedan användes
+- Använda olika typer av datatrafik, till exempel skicka upp position med jämna mellanrum för att kunna se en tydlig färdväg
+- Spela in ljud/bild vid aktivitet på telefonen efter det att timern har gått ut
+- Kontinuerligt skicka uppdateringar från telefonen efter det att timern gått ut
+- Kontinuerligt spela upp “pling-ljud” efter det att timern har gått ut för att underlätta lokalisering av mobil (och användare)
+
