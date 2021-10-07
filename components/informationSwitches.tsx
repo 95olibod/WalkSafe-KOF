@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { View, Text, Switch, StyleSheet } from "react-native";
 import { InformationContext } from "../context/informationContext";
 
@@ -12,32 +12,26 @@ const informationSwitches = () => {
 
     return (
         <View>
-            <View style={style.flexrow}>
-                <View style={style.textrow}>
-                    <Text style={style.textstylning}>Platsinfo</Text>
-                    <Text style={style.textstylning}>Batteritid</Text>
+            <View style={styles.flexrow}>
+                <View style={styles.textrow}>
+                    <Text style={styles.textstylning}>Platsinfo</Text>
+                    <Text style={styles.textstylning}>Batteritid</Text>
                 </View>
-                <View style={style.container}>
-                    <Switch
-                        style={style.switchstylning}
-                        trackColor={{ false: "#767577", true: "#81b0ff" }}
-                        thumbColor={
-                            includeLocation
-                                ? "rgba(40, 150, 235, 0.7)"
-                                : "rgba(45, 155, 240, 0.8)"
-                        }
+
+                <View style={styles.root}>
+                    <Switch 
+                        style={styles.switchstylning}
+                        trackColor={{ false: '#767577', true: '#81b0ff' }}
+                        thumbColor={includeLocation ? "rgba(40, 150, 235, 0.7)" : "rgba(45, 155, 240, 0.8)"}
                         ios_backgroundColor="#3e3e3e"
                         onValueChange={toggleLocationSwitch}
                         value={includeLocation}
                     />
-                    <Switch
-                        style={style.switchstylning}
-                        trackColor={{ false: "#767577", true: "#81b0ff" }}
-                        thumbColor={
-                            includeBattery
-                                ? "rgba(40, 150, 235, 0.7)"
-                                : "rgba(45, 155, 240, 0.8)"
-                        }
+
+                    <Switch 
+                        style={styles.switchstylning}
+                        trackColor={{ false: '#767577', true: '#81b0ff' }}
+                        thumbColor={includeBattery ? "rgba(40, 150, 235, 0.7)" : "rgba(45, 155, 240, 0.8)"}
                         ios_backgroundColor="#3e3e3e"
                         onValueChange={toggleBatterySwitch}
                         value={includeBattery}
@@ -50,8 +44,8 @@ const informationSwitches = () => {
 
 export default informationSwitches;
 
-const style = StyleSheet.create({
-    container: {
+const styles = StyleSheet.create({
+    root: {
         flexDirection: "column",
         marginTop: 5,
         marginLeft: 195,

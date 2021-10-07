@@ -1,10 +1,18 @@
 import * as Contacts from "expo-contacts";
 import React, { useState } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  StyleSheet,
+  Image,
+  Text,
+  TouchableHighlight,
+  View,
+} from "react-native";
 import { ContactItem, useContacts } from "../context/contactContext";
 import ContactCard from "../components/contactCard";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigators/RootStackNavigator";
+import KofaLogo from "../public/images/logoWalkSafe.png";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Kontakter">;
 
@@ -12,37 +20,27 @@ const ContactsPage = ({ navigation }: Props) => {
   const { favouriteContacts } = useContacts();
 
   return (
-    <View style={styles.contentContainer}>
-      {favouriteContacts.length > 0 ? (
-        <View style={styles.buttonStyle}>
-          <Button
-            title="Gå till information"
-            onPress={() => navigation.navigate("Information")}
-          ></Button>
-        </View>
-      ) : (
-        null
-      )}
+    <View style={styles.root}>
+      <Image source={KofaLogo} style={styles.logo}></Image>
+
       <ContactCard />
+      {favouriteContacts.length > 0 ? (
+        <TouchableHighlight
+          style={[styles.button]}
+          onPress={() => navigation.navigate("Information")}
+        >
+          <Text style={[styles.buttonText]}>Gå vidare</Text>
+        </TouchableHighlight>
+      ) : null}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  text: {
-    color: "white",
-  },
-  contentContainer: {
+  root: {
     marginRight: 30,
     marginLeft: 30,
     height: "100%",
-  },
-  cont: {
-    flex: 1,
-    paddingTop: 22,
   },
   sectionHeader: {
     paddingTop: 2,
@@ -61,8 +59,23 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
   },
-  buttonStyle: {
-    marginTop: 8,
+  button: {
+    backgroundColor: "rgba(45, 155, 240, 0.4)",
+    padding: 20,
+    borderRadius: 10,
+    alignItems: "center",
+    marginBottom: 30,
+  },
+  buttonText: {
+    fontSize: 20,
+    fontWeight: "300",
+    color: "#fff",
+  },
+  logo: {
+    width: 110,
+    height: 70,
+    marginTop: -20,
+    alignSelf: "flex-end",
   },
 });
 

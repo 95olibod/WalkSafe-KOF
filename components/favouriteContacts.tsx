@@ -19,8 +19,8 @@ const FavouriteContacts = ({
 }: Props) => {
     if (favouriteContacts.length > 0) {
         return (
-            <View style={{ flex: 1 }}>
-                <Text style={styles.text}>Favoriter</Text>
+            <View style={ styles.root }>
+                <Text style={styles.title}>Tillagda nödkontakter:</Text>
                 <FlatList
                     data={favouriteContacts}
                     style={styles.container}
@@ -30,7 +30,7 @@ const FavouriteContacts = ({
                                 style={styles.contactBox}
                                 onPress={() => removeFavouriteContact(item)}
                             >
-                                <Text style={styles.title}>
+                                <Text style={styles.flatListText}>
                                     {item.contactName}
                                 </Text>
                             </TouchableHighlight>
@@ -43,14 +43,17 @@ const FavouriteContacts = ({
     } else
         return (
             <View style={styles.noFavourites}>
-                <Text style={styles.text}>Favoriter</Text>
-                <Text style={styles.title}>Inga favoritkontakter valda</Text>
+                <Text style={styles.title}>Tillagda nödkontakter:</Text>
+                <Text style={styles.text}>Inga favoritkontakter valda</Text>
             </View>
         );
 };
 export default FavouriteContacts;
 
 const styles = StyleSheet.create({
+    root: {
+        flex: 1,
+    },
     container: {
         height: 120,
         marginBottom: 8,
@@ -62,14 +65,17 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         paddingVertical: 8,
         marginTop: 8,
-        marginHorizontal: 16,
-    },
-    title: {
-        fontSize: 18,
     },
     text: {
-        fontSize: 30,
-        color: "white",
+        fontSize: 14,
+        color: "#fff",
+    },
+    title: {
+        fontSize: 25,
+        color: "#fff",
+    },
+    flatListText: {
+        fontSize: 20
     },
     noFavourites: {
         paddingHorizontal: 16,
@@ -77,6 +83,6 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginTop: 10,
         display: "flex",
-        justifyContent: "center",
+        alignItems: "center"
     },
 });
