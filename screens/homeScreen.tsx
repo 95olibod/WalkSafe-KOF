@@ -16,21 +16,22 @@ import KofaLogo from "../public/images/logoWalkSafe.png";
 type Props = NativeStackScreenProps<RootStackParamList, "Kontakter">;
 
 function HomeScreen({ navigation }: Props) {
-  const { setTimerInputFromUser } = useContext(DeviceContext);
+    const { setTimerInputFromUser } = useContext(DeviceContext);
 
-  const [minutes, setMinutes] = useState(0);
-  const [hours, setHours] = useState(0);
-  const [totalMinutes, setTotalMinutes] = useState(0);
+    const [minutes, setMinutes] = useState(0);
+    const [hours, setHours] = useState(0);
+    const [totalMinutes, setTotalMinutes] = useState(0);
 
-  const updateHours = (hours: number) => {
-    setHours(hours);
-    setTotalMinutes(minutes + hours * 60);
-  };
+    const updateHours = (hours: number) => {
+        setHours(hours);
+        setTotalMinutes(minutes + hours * 60);
+    };
 
-  const updateMinutes = (minutes: number) => {
-    setMinutes(minutes);
-    setTotalMinutes(minutes + hours * 60);
-  };
+    const updateMinutes = (minutes: number) => {
+        setMinutes(minutes);
+        setTotalMinutes(minutes + hours * 60);
+    };
+
 
   const handlePress = () => {
     if (totalMinutes >= 1) {
@@ -102,6 +103,7 @@ const styles = StyleSheet.create({
     marginTop: -40,
     alignSelf: "center",
   },
+
 });
 
 export default HomeScreen;

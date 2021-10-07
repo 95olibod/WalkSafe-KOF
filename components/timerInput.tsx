@@ -17,7 +17,7 @@ function TimerInput({updateMinutes, updateHours}: Props) {
             type="up-down"
             minValue={0}
             maxValue={100}
-            onChange={(hour) => updateHours(hour)}
+            onChange={(hour: number) => updateHours(hour)}
             textColor="white"
           />
         </View>
@@ -27,7 +27,7 @@ function TimerInput({updateMinutes, updateHours}: Props) {
             type="up-down"
             minValue={0}
             maxValue={59}
-            onChange={(minutes) => updateMinutes(minutes)}
+            onChange={(minutes: number) => updateMinutes(minutes)}
             textColor="white"
           />
         </View>
