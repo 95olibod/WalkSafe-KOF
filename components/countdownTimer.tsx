@@ -56,10 +56,12 @@ const CountdownTimer = ({ onStop, handleTimerFinished }: Props) => {
       </View>
       <TouchableHighlight
         style={[styles.button]}
-        onPress={() => {
-          setIsTimerStart(false);
-          setResetTimer(true);
-          onStop();
+        onPress={ () => {
+          setResetTimer(true)
+          setIsTimerStart(!isTimerStart)
+          setTimeout(() => {
+            onStop();
+        }, 500);
         }}
       >
         <Text style={styles.buttonText}>Stoppa Timer</Text>
