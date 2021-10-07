@@ -59,18 +59,22 @@ const CountdownTimer = ({ onStop, handleTimerFinished }: Props) => {
           </Text>
         </TouchableHighlight>
       </View>
-      <TouchableHighlight
+      {isTimerStart === true ?
+
+        <TouchableHighlight
         style={[styles.button]}
         onPress={ () => {
           setResetTimer(true)
           setIsTimerStart(!isTimerStart)
           setTimeout(() => {
             onStop();
-        }, 500);
+          }, 500);
         }}
-      >
+        >
         <Text style={styles.buttonText}>Stoppa Timer</Text>
       </TouchableHighlight>
+    : null  
+    }
     </SafeAreaView>
   );
 
