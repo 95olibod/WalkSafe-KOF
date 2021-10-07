@@ -1,50 +1,71 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import * as Device from "expo-device";
 import React, { useContext } from "react";
 import { StyleSheet, Image, View } from "react-native";
 import CountdownTimer from "../components/countdownTimer";
 import { SendSms } from "../components/smsSender";
 import { useContacts } from "../context/contactContext";
 import { DeviceContext } from "../context/deviceContext";
+import { InformationContext } from "../context/informationContext";
 import { RootStackParamList } from "../navigators/RootStackNavigator";
 import KofaLogo from "../public/images/logoWalkSafe.png";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Timer">;
 
 function TimerScreen({ navigation }: Props) {
-  const {
-    batteryLevel,
-    locationLongitude,
-    locationLatitude,
-    deviceName,
-    deviceModel,
-    userText,
-  } = useContext(DeviceContext);
+    const {
+        batteryLevel,
+        locationLongitude,
+        locationLatitude,
+        deviceName,
+        deviceModel,
+    } = useContext(DeviceContext);
 
-  const { favouriteContacts } = useContacts();
+    const {
+        includeLocation,
+        includeBattery,
+        personalMessage,
+        addPersonalMessage,
+    } = useContext(InformationContext);
 
-  async function handleTimerFinished() {
-    const favoritNumbers = favouriteContacts.map(
-      (contact) => contact.phoneNumber
-    );
-    const result = await SendSms(
-      favoritNumbers,
-      deviceName,
-      deviceModel,
-      batteryLevel,
-      locationLongitude,
-      locationLatitude,
-      userText
-    );
+    const { favouriteContacts } = useContacts();
 
-    if (result === "sent") {
-      //FÅ NOTIS
-      navigation.navigate("Hem");
-    } else if (result === "unknown") {
-      //FÅ NOTIS
-      setTimeout(() => {
-        navigation.navigate("Hem");
-      }, 500);
+    async function handleTimerFinished() {
+        const favoritNumbers = favouriteContacts.map(
+            (contact) => contact.phoneNumber
+        );
+
+        const result = await SendSms(
+            favoritNumbers,
+            deviceName,
+            deviceModel,
+            locationLongitude,
+            locationLatitude,
+            personalMessage,
+            batteryLevel,
+            includeLocation,
+            includeBattery
+        );
+
+        addPersonalMessage("");
+
+        if (result === "sent") {
+            //FÅ NOTIS
+            navigation.navigate("Hem");
+        } else if (result === "unknown") {
+            //FÅ NOTIS
+            setTimeout(() => {
+                navigation.navigate("Hem");
+            }, 500);
+        }
+        // Cancelled / Unavaliable
+        else {
+            // TODO: What happens when the message could not be sent?
+            //FÅ NOTIS "MEDDELANDE HAR INTE SKICKATS"
+            alert("Du avbröt SMS-utskick");
+            setTimeout(() => {
+                navigation.navigate("Hem");
+            }, 500);
+        }
     }
     // Cancelled / Unavaliable
     else {

@@ -1,47 +1,50 @@
 import React, { createContext, FC, useContext, useState } from "react";
 
-export interface ActiveInfo {
-    locationComponent: boolean;
-    battery: boolean;
-}
-
 interface ContextValue {
-    activeList: ActiveInfo[];
+    personalMessage: string;
     toggleLocationSwitch: () => void;
     toggleBatterySwitch: () => void;
+    addPersonalMessage: (text: string) => void;
     includeLocation: boolean;
-    includeBattery: boolean
+    includeBattery: boolean;
 }
 
 export const InformationContext = createContext<ContextValue>({
-    toggleLocationSwitch: () => {}, 
-    toggleBatterySwitch: () => {}, 
-    activeList: [],
+    toggleLocationSwitch: () => {},
+    toggleBatterySwitch: () => {},
+    addPersonalMessage: () => {},
+    personalMessage: "",
     includeLocation: false,
-    includeBattery: false
+    includeBattery: false,
 });
 
 const InformationProvider: FC = ({ children }) => {
-
     const [includeLocation, setIncludeLocation] = useState(false);
     const [includeBattery, setIncludeBattery] = useState(false);
+    const [personalMessage, setPersonalMessage] = useState<string>("");
 
-    const toggleLocationSwitch = () => setIncludeLocation(previousState => !previousState);
-    const toggleBatteriSwitch = () => setIncludeBattery(previousState => !previousState);
+    const toggleLocationSwitch = () =>
+        setIncludeLocation((previousState) => !previousState);
+    const toggleBatterySwitch = () =>
+        setIncludeBattery((previousState) => !previousState);
+
+    const addPersonalMessage = (text: string) => {
+        setPersonalMessage(text);
+    };
 
     return (
         <InformationContext.Provider
             value={{
                 toggleLocationSwitch,
-                toggleBatterySwitch: toggleBatteriSwitch,
-                activeList: [],
-                includeBattery: includeBattery,
-                includeLocation
-
+                toggleBatterySwitch,
+                addPersonalMessage,
+                personalMessage,
+                includeBattery,
+                includeLocation,
             }}
         >
             {children}
         </InformationContext.Provider>
-    )
-}
+    );
+};
 export default InformationProvider;

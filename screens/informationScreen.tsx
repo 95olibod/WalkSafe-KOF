@@ -1,15 +1,17 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import React from "react";
+import React, { useContext } from "react";
 import { Text, Image, StyleSheet, TouchableHighlight } from "react-native";
 import { RootStackParamList } from "../navigators/RootStackNavigator";
-import InformationSwitches from "../components/informationSwitches"
+import InformationSwitches from "../components/informationSwitches";
 import SmsInputValidation from "../components/smsInputValidation";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { InformationContext } from "../context/informationContext";
 import KofaLogo from "../public/images/logoWalkSafe.png";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Kontakter">;
 
 const InformationScreen = ({ navigation }: Props) => {
+    const { personalMessage } = useContext(InformationContext);
 
     return(
         <SafeAreaView style={styles.root}>
@@ -17,18 +19,19 @@ const InformationScreen = ({ navigation }: Props) => {
             <Text style={styles.textstyle}>Inkludera i SMS-utskick</Text>
             <InformationSwitches/>
             <SmsInputValidation/>
+          {personalMessage ? (
             <TouchableHighlight
           style={[styles.button]}
           onPress={() => navigation.navigate("Timer")}
         >
           <Text style={[styles.buttonText]}>Gå vidare</Text>
         </TouchableHighlight>
+          ) : null}
         </SafeAreaView>
-    )
-}
-  
-export default InformationScreen;
+    );
+};
 
+export default InformationScreen;
 const styles = StyleSheet.create ({
     root: {
         height: "100%",

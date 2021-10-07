@@ -1,9 +1,9 @@
-import React from 'react';
-import { Formik } from 'formik';
-import { View, StyleSheet } from 'react-native';
-import * as Yup from 'yup';
-import SmsMessageInput from './smsMessageInput';
-
+import React, { useContext } from "react";
+import { Formik } from "formik";
+import { View, StyleSheet } from "react-native";
+import * as Yup from "yup";
+import SmsMessageInput from "./smsMessageInput";
+import { InformationContext } from "../context/informationContext";
 
 interface Post {
     message: string;
@@ -11,17 +11,19 @@ interface Post {
 
 const defaultPost: Post = { message: "" };
 
-type PostSchemaType = Record<keyof Post, Yup.AnySchema>
+type PostSchemaType = Record<keyof Post, Yup.AnySchema>;
 
 const PostSchema = Yup.object().shape<PostSchemaType>({
     message: Yup.string().required("Detta fält behöver innehålla något").trim().min(2, "Behöver minst 2 bokstäver"),
 });
 
 export default function SmsInputValidation() {
+    const { addPersonalMessage, personalMessage } =
+        useContext(InformationContext);
 
     const handleSubmitForm = (post: Post) => {
-        console.log(post);
-    }
+        addPersonalMessage(post.message);
+    };
 
     return (
         <View style={styles.root}>
@@ -30,7 +32,14 @@ export default function SmsInputValidation() {
                 onSubmit={handleSubmitForm}
                 validationSchema={PostSchema}
             >
-                {({ touched, errors, values, handleChange, handleSubmit, handleBlur }) => (
+                {({
+                    touched,
+                    errors,
+                    values,
+                    handleChange,
+                    handleSubmit,
+                    handleBlur,
+                }) => (
                     <>
                         <SmsMessageInput
                             multiline={true}
@@ -38,8 +47,8 @@ export default function SmsInputValidation() {
                             textAlignVertical="top"
                             label="Personligt meddelande"
                             value={values.message}
-                            onChangeText={handleChange<keyof Post>('message')}
-                            onBlur={handleBlur<keyof Post>('message')}
+                            onChangeText={handleChange<keyof Post>("message")}
+                            onBlur={handleBlur<keyof Post>("message")}
                             helperText={touched.message && errors.message}
                             onChange={() => handleSubmit()}
                         />
@@ -47,7 +56,7 @@ export default function SmsInputValidation() {
                 )}
             </Formik>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({

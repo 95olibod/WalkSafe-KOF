@@ -3,15 +3,21 @@ import { View, Text, Switch, StyleSheet } from "react-native";
 import { InformationContext } from "../context/informationContext";
 
 const informationSwitches = () => {
-    const {toggleBatterySwitch: toggleBatterySwitch, toggleLocationSwitch, includeLocation, includeBattery} = useContext(InformationContext)
+    const {
+        toggleBatterySwitch,
+        toggleLocationSwitch,
+        includeLocation,
+        includeBattery,
+    } = useContext(InformationContext);
 
-    return(
+    return (
         <View>
             <View style={styles.flexrow}>
                 <View style={styles.textrow}>
                     <Text style={styles.textstylning}>Platsinfo</Text>
                     <Text style={styles.textstylning}>Batteritid</Text>
                 </View>
+
                 <View style={styles.root}>
                     <Switch 
                         style={styles.switchstylning}
@@ -21,6 +27,7 @@ const informationSwitches = () => {
                         onValueChange={toggleLocationSwitch}
                         value={includeLocation}
                     />
+
                     <Switch 
                         style={styles.switchstylning}
                         trackColor={{ false: '#767577', true: '#81b0ff' }}
@@ -32,8 +39,8 @@ const informationSwitches = () => {
                 </View>
             </View>
         </View>
-    )
-}
+    );
+};
 
 export default informationSwitches;
 
@@ -56,5 +63,5 @@ const styles = StyleSheet.create({
     },
     switchstylning: {
         marginBottom: 30,
-    }, 
+    },
 });
