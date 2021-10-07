@@ -8,7 +8,7 @@ Walk Safe är en applikation som möjliggör för användarens telefon att autom
 Appens användningsområde var från början tänkt att vara bredare med bland annat användning för folk som gått bort sig under svampplockning, på fjällvandring mm. Beslutet togs dock att nischa appen och den inriktar sig nu istället mot personer som går hem i en otrygg miljö. 
 
 ## Struktur
-Filerna är placerade i olika mappar för att ge en tydligare förståelse och översikt av vad som finns var och vad som gör vad. 
+Applikationen är skriven i Typescript. Filerna är placerade i olika mappar för att ge en tydligare förståelse och översikt av vad som finns var och vad som gör vad. 
 Funktionalitet är uppdelade i små komponenter som har sina egna ansvarsområden. 
 
 ## Installation
