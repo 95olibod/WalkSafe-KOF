@@ -13,10 +13,10 @@ export default function SmsMessageInput({
 }: Props) {
     
     return(
-        <View style={style.root}>
+        <View style={styles.root}>
             <Text
                 style={[
-                    style.label,
+                    styles.label,
                     helperText ? { color: 'red' } : null
                 ]}
             >
@@ -25,35 +25,36 @@ export default function SmsMessageInput({
             <NativeTextInput
                 {...textInputProps}
                 style={[
-                    style.input,
+                    styles.input,
                     helperText ? { borderColor: 'red'} : null
                 ]}
             />
-            {helperText && <Text style={style.helperText}>{helperText}</Text>}
+            {helperText && <Text style={styles.helperText}>{helperText}</Text>}
         </View>
     )
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
     root: {
-        width: '100%',
+        width: "100%",
         marginBottom: 1,
     },
     label: {
         fontSize: 15,
-        fontWeight: '500',
-        color: 'white',
+        fontWeight: "500",
+        color: "white",
     },
     helperText: {
-        color: 'red',
+        color: "red",
     },
     input: {
-        width: '100%',
+        width: "100%",
         padding: 2,
         backgroundColor: "rgba(45, 155, 240, 0.4)",
         borderBottomWidth: 1,
         borderColor: "#fff",
         fontSize: 16,
         marginVertical: 4,
+        color: '#fff',
     },
 });
