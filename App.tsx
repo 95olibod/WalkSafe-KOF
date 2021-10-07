@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import {
   ImageBackground,
-  StyleSheet
+  StyleSheet, Image
 } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import ContactsProvider from "./context/contactContext";

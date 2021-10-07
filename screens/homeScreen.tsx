@@ -42,6 +42,8 @@ function HomeScreen({ navigation }: Props) {
   return (
     <View style={styles.root}>
       <View style={styles.viewContainer}>
+        <Image source={KofaLogo} style={styles.logo}></Image>
+
         {totalMinutes < 1 ? (
           <Text style={styles.validationText}>
             Timer måste minst ställas in på 1 minut
@@ -53,14 +55,12 @@ function HomeScreen({ navigation }: Props) {
       <View>
         {totalMinutes > 0 ? (
           <TouchableHighlight
-          style={[styles.button]}
-          onPress={() => handlePress()}
-        >
-          <Text style={[styles.buttonText]}>Gå vidare</Text>
-        </TouchableHighlight>
+            style={[styles.button]}
+            onPress={() => handlePress()}
+          >
+            <Text style={[styles.buttonText]}>Gå vidare</Text>
+          </TouchableHighlight>
         ) : null}
-
-        
       </View>
     </View>
   );
@@ -68,12 +68,13 @@ function HomeScreen({ navigation }: Props) {
 
 const styles = StyleSheet.create({
   root: {
+    flex: 1,
+    marginHorizontal: 30,
     height: "100%",
-    alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
   },
   viewContainer: {
-    alignItems: "center"
+    alignItems: "center",
   },
   text: {
     color: "white",
@@ -86,13 +87,21 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "rgba(45, 155, 240, 0.4)",
     padding: 20,
-    borderRadius:10,
+    borderRadius: 10,
+    marginBottom: 30,
   },
   buttonText: {
-    fontSize:20,
+    fontSize: 20,
     fontWeight: "300",
-    color: "#fff"
-  }
+    color: "#fff",
+    textAlign: "center",
+  },
+  logo: {
+    width: 230,
+    height: 150,
+    marginTop: -40,
+    alignSelf: "center",
+  },
 });
 
 export default HomeScreen;

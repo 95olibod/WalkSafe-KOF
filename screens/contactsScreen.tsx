@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import {
   Button,
   StyleSheet,
+  Image,
   Text,
   TouchableHighlight,
   View,
@@ -11,6 +12,7 @@ import { ContactItem, useContacts } from "../context/contactContext";
 import ContactCard from "../components/contactCard";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigators/RootStackNavigator";
+import KofaLogo from "../public/images/logoWalkSafe.png";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Kontakter">;
 
@@ -18,17 +20,17 @@ const ContactsPage = ({ navigation }: Props) => {
   const { favouriteContacts } = useContacts();
 
   return (
-    <View style={styles.contentContainer}>
+    <View style={styles.root}>
+      <Image source={KofaLogo} style={styles.logo}></Image>
+
       <ContactCard />
       {favouriteContacts.length > 0 ? (
-        
-          <TouchableHighlight
-            style={[styles.button]}
-            onPress={() => navigation.navigate("Information")}
-          >
-            <Text style={[styles.buttonText]}>Gå vidare</Text>
-          </TouchableHighlight>
-        
+        <TouchableHighlight
+          style={[styles.button]}
+          onPress={() => navigation.navigate("Information")}
+        >
+          <Text style={[styles.buttonText]}>Gå vidare</Text>
+        </TouchableHighlight>
       ) : null}
     </View>
   );
@@ -36,12 +38,6 @@ const ContactsPage = ({ navigation }: Props) => {
 
 const styles = StyleSheet.create({
   root: {
-    flex: 1,
-  },
-  text: {
-    color: "white",
-  },
-  contentContainer: {
     marginRight: 30,
     marginLeft: 30,
     height: "100%",
@@ -68,12 +64,18 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 10,
     alignItems: "center",
-    marginBottom: 30
+    marginBottom: 30,
   },
   buttonText: {
     fontSize: 20,
     fontWeight: "300",
     color: "#fff",
+  },
+  logo: {
+    width: 110,
+    height: 70,
+    marginTop: -20,
+    alignSelf: "flex-end",
   },
 });
 
