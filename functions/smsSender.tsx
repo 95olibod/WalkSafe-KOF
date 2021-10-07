@@ -49,7 +49,7 @@ const messageOutput = (
 
     const userMessage = ` - ${personalMessage}\n\n`;
 
-    const deviceUnit = `Enhet - ${deviceModel}\nModell - ${deviceName}:\n`;
+    const deviceUnit = `Modell - ${deviceModel}\nEnhet - ${deviceName}:\n`;
 
     const batteryLevel = battery !== 0 ? ` - Batteri: ${battery}%\n` : "";
 

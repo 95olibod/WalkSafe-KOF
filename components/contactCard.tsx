@@ -9,12 +9,12 @@ import SearchBarContacts from "./searchBarContacts";
 
 const ContactCard = () => {
   const [allContacts, setAllContact] = useState<ContactItem[]>([]);
+  const [filteredContacts, setFilteredContacts] =
+  useState<ContactItem[]>(allContacts);
 
   const { favouriteContacts, dispatch } = useContacts();
 
-  const [filteredContacts, setFilteredContacts] =
-    useState<ContactItem[]>(allContacts);
-
+  //Adds contact to favourites
   const addFavouriteContact = (contact: ContactItem) => {
     const contactExist = favouriteContacts.find(
       (searchedContact) => contact.contactName === searchedContact.contactName
@@ -32,6 +32,7 @@ const ContactCard = () => {
     }
   };
 
+ //Removes contact from favourites
   const removeFavouriteContact = (contact: ContactItem) => {
     const contactExist = favouriteContacts.find(
       (searchedContact) => contact.contactName === searchedContact.contactName
@@ -49,20 +50,17 @@ const ContactCard = () => {
     }
   };
 
+  //Search function which filter contacts who matches input
   const filterContacts = (text: string) => {
     const result = allContacts.filter((contact) => {
       return (
         contact.contactName.toLowerCase().search(text.toLocaleLowerCase()) != -1
       );
     });
-
-    if (!result) {
-      console.log("inga resultat");
-    }
-
     setFilteredContacts(result);
   };
 
+  //Gets all contacts from local phonebook. 
   async function getAllContacts() {
     const { status } = await Contacts.requestPermissionsAsync();
     if (status === "granted") {
@@ -102,7 +100,7 @@ const ContactCard = () => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.root}>
       <ContactButton
         allContacts={allContacts}
         getAllContacts={getAllContacts}
@@ -127,35 +125,8 @@ const ContactCard = () => {
 export default ContactCard;
 
 const styles = StyleSheet.create({
-  container: {
+  root: {
     flex: 1,
     marginBottom: 8,
-  },
-  contactBox: {
-    backgroundColor: "#fff",
-    borderRadius: 10,
-    borderColor: "black",
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    marginTop: 8,
-    marginHorizontal: 16,
-  },
-  title: {
-    fontSize: 18,
-  },
-  buttonStyle: {
-    marginTop: 8,
-  },
-  text: {
-    fontSize: 30,
-    color: "white",
-  },
-  noFavourites: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    marginBottom: 10,
-    marginTop: 10,
-    display: "flex",
-    justifyContent: "center",
   },
 });
