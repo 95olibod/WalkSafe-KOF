@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik } from 'formik';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import * as Yup from 'yup';
 import SmsMessageInput from './smsMessageInput';
 
@@ -14,7 +14,7 @@ const defaultPost: Post = { message: "" };
 type PostSchemaType = Record<keyof Post, Yup.AnySchema>
 
 const PostSchema = Yup.object().shape<PostSchemaType>({
-    message: Yup.string().required().trim().min(2),
+    message: Yup.string().required("Detta fält behöver innehålla något").trim().min(2, "Behöver minst 2 bokstäver"),
 });
 
 export default function SmsInputValidation() {
@@ -24,7 +24,7 @@ export default function SmsInputValidation() {
     }
 
     return (
-        <View style={style.container}>
+        <View style={styles.root}>
             <Formik
                 initialValues={defaultPost}
                 onSubmit={handleSubmitForm}
@@ -52,14 +52,14 @@ export default function SmsInputValidation() {
     )
 }
 
-const style = StyleSheet.create({
-    container: {
+const styles = StyleSheet.create({
+    root: {
         width: "100%",
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: "center",
+        justifyContent: "center",
         padding: 16,
     },
     textStylning: {
-        color: 'white',
+        color: "white",
     },
 });
