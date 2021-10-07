@@ -6,7 +6,7 @@ import EndTimerScreen from "../screens/endTimerScreen";
 import ContactsScreen from "../screens/contactsScreen";
 import InformationScreen from "../screens/informationScreen";
 import TimerScreen from "../screens/timerScreen";
-import Constants from "expo-constants";
+
 
 export type RootStackParamList = {
     Hem: undefined;
@@ -17,20 +17,6 @@ export type RootStackParamList = {
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-
-// const MyTheme = {
-//     ...DefaultTheme,
-//     colors: {
-//         ...DefaultTheme.colors,
-//         backgroundColor: "transparent",
-//     },
-//     root: {
-//         marginTop: 500,
-//     },
-//     // header: {
-//     //     marginTop: Constants.statusBarHeight
-//     // },
-// };
 
 export default function RootStackNavigator() {
     return (
@@ -44,11 +30,9 @@ export default function RootStackNavigator() {
                     headerTitleAlign: "center",
                     headerTitleStyle: { color: "white" },
                     headerTintColor: "white",
-                    //headerStyle: { backgroundColor: "red" }
-                    // headerTransparent: true, // denna vill vi kanske ha
-                    // containedTransparentModal: true
                 }}
             >
+
                 <Stack.Screen name="Hem" component={HomeScreen} />
                 <Stack.Screen
                     name="Information"
@@ -59,9 +43,11 @@ export default function RootStackNavigator() {
                 <Stack.Screen
                     name="EndTimerScreen"
                     component={EndTimerScreen}
-                    options={{ headerBackVisible: false }}
+                    options={{ title: "", headerTitleAlign: "center"}}
                 />
             </Stack.Navigator>
+            
         </NavigationContainer>
     );
 }
+

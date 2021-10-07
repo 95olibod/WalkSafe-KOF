@@ -11,7 +11,7 @@ type Props = NativeStackScreenProps<RootStackParamList, "Kontakter">;
 const InformationScreen = ({ navigation }: Props) => {
 
     return(
-        <SafeAreaView style={style.container}>
+        <SafeAreaView style={style.root}>
                 <Text style={style.textstyle}>INFORMATION page</Text>
                 {/* <Button title="Gå tillbaka hem" onPress={onGoBack}></Button> */}
                 {/* <Button
@@ -32,7 +32,7 @@ const InformationScreen = ({ navigation }: Props) => {
 export default InformationScreen;
 
 const style = StyleSheet.create ({
-    container: {
+    root: {
         height: "100%",
         width: "100%",
         alignItems: 'center',
