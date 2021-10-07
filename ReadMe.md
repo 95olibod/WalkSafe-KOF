@@ -22,32 +22,32 @@ OBS! För att notiser ska fungera i EXPO, måste du logga in på ditt EXPO-konto
 
 ### React-native komponenter:
 
-[Text](https://docs.expo.dev/versions/v42.0.0/react-native/text/)
-[View](https://docs.expo.dev/versions/v42.0.0/react-native/view/)
-[ScrollView](https://docs.expo.dev/versions/v42.0.0/react-native/scrollview/)
-[SafeAreaView](https://docs.expo.dev/versions/v42.0.0/react-native/safeareaview/)
-[StyleSheet](https://docs.expo.dev/versions/v42.0.0/react-native/stylesheet/)
-[Switch](https://docs.expo.dev/versions/v42.0.0/react-native/switch/)
-[TextInput](https://docs.expo.dev/versions/v42.0.0/react-native/textinput/)
-[TouchableHighlight](https://docs.expo.dev/versions/v42.0.0/react-native/touchablehighlight/)
-[FlatList](https://docs.expo.dev/versions/v42.0.0/react-native/flatlist/)
-[Alert](https://docs.expo.dev/versions/v42.0.0/react-native/alert/)
+[Text](https://docs.expo.dev/versions/v42.0.0/react-native/text/),
+[View](https://docs.expo.dev/versions/v42.0.0/react-native/view/),
+[ScrollView](https://docs.expo.dev/versions/v42.0.0/react-native/scrollview/),
+[SafeAreaView](https://docs.expo.dev/versions/v42.0.0/react-native/safeareaview/),
+[StyleSheet](https://docs.expo.dev/versions/v42.0.0/react-native/stylesheet/),
+[Switch](https://docs.expo.dev/versions/v42.0.0/react-native/switch/),
+[TextInput](https://docs.expo.dev/versions/v42.0.0/react-native/textinput/),
+[TouchableHighlight](https://docs.expo.dev/versions/v42.0.0/react-native/touchablehighlight/),
+[FlatList](https://docs.expo.dev/versions/v42.0.0/react-native/flatlist/),
+[Alert](https://docs.expo.dev/versions/v42.0.0/react-native/alert/),
 [Image](https://docs.expo.dev/versions/v42.0.0/react-native/image/)
 
 
 ### Expo komponenter: 
 
-[StatusBar](https://docs.expo.dev/versions/v42.0.0/react-native/statusbar/)
-[Contacts](https://docs.expo.dev/versions/v42.0.0/sdk/contacts/)
-[Location](https://docs.expo.dev/versions/v42.0.0/sdk/location/)
-[Battery](https://docs.expo.dev/versions/v42.0.0/sdk/battery/)
-[Device](https://docs.expo.dev/versions/v42.0.0/sdk/device/)
-[SMS](https://docs.expo.dev/versions/v42.0.0/sdk/sms/)
-[Notifications](https://docs.expo.dev/versions/v42.0.0/sdk/notifications/)
-[Constans](https://docs.expo.dev/versions/v42.0.0/sdk/constants/)
+[StatusBar](https://docs.expo.dev/versions/v42.0.0/react-native/statusbar/),
+[Contacts](https://docs.expo.dev/versions/v42.0.0/sdk/contacts/),
+[Location](https://docs.expo.dev/versions/v42.0.0/sdk/location/),
+[Battery](https://docs.expo.dev/versions/v42.0.0/sdk/battery/),
+[Device](https://docs.expo.dev/versions/v42.0.0/sdk/device/),
+[SMS](https://docs.expo.dev/versions/v42.0.0/sdk/sms/),
+[Notifications](https://docs.expo.dev/versions/v42.0.0/sdk/notifications/),
+[Constans](https://docs.expo.dev/versions/v42.0.0/sdk/constants/),
 
 ### Externa moduler:
-[react-native-stopwatch-timer](https://snack.expo.dev/@aboutreact/stopwatch-and-timer?session_id=snack-session-y4eB29bZK)
+[react-native-stopwatch-timer](https://snack.expo.dev/@aboutreact/stopwatch-and-timer?session_id=snack-session-y4eB29bZK),
 [Formik](https://formik.org/docs/overview)
 
 Annat externt:
