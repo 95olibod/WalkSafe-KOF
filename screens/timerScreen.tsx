@@ -1,11 +1,11 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import * as Device from "expo-device";
 import React, { useContext } from "react";
 import { StyleSheet, View } from "react-native";
 import CountdownTimer from "../components/countdownTimer";
 import { SendSms } from "../components/smsSender";
 import { useContacts } from "../context/contactContext";
 import { DeviceContext } from "../context/deviceContext";
+import { InformationContext } from "../context/informationContext";
 import { RootStackParamList } from "../navigators/RootStackNavigator";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Timer">;
@@ -17,8 +17,14 @@ function TimerScreen({ navigation }: Props) {
         locationLatitude,
         deviceName,
         deviceModel,
-        userText,
     } = useContext(DeviceContext);
+
+    const {
+        includeLocation,
+        includeBattery,
+        personalMessage,
+        addPersonalMessage,
+    } = useContext(InformationContext);
 
     const { favouriteContacts } = useContacts();
 
@@ -31,11 +37,15 @@ function TimerScreen({ navigation }: Props) {
             favoritNumbers,
             deviceName,
             deviceModel,
-            batteryLevel,
             locationLongitude,
             locationLatitude,
-            userText
+            personalMessage,
+            batteryLevel,
+            includeLocation,
+            includeBattery
         );
+
+        addPersonalMessage("");
 
         if (result === "sent") {
             //FÅ NOTIS
@@ -50,6 +60,7 @@ function TimerScreen({ navigation }: Props) {
         else {
             // TODO: What happens when the message could not be sent?
             //FÅ NOTIS "MEDDELANDE HAR INTE SKICKATS"
+            alert("Du avbröt SMS-utskick");
             setTimeout(() => {
                 navigation.navigate("Hem");
             }, 500);
