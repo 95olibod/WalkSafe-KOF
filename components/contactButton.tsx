@@ -13,6 +13,8 @@ interface Props {
   getAllContacts: () => void;
 }
 
+// component that returns a TouchableHighlight as a button, calling fuction getAllContacts who recives data from contactContext
+
 const ContactButton = ({ allContacts, getAllContacts }: Props) => {
   if (allContacts.length < 1) {
     return (

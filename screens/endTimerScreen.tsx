@@ -1,14 +1,13 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import {
-  Button,
   View,
   StyleSheet,
   Image,
   Text,
   TouchableHighlight,
 } from "react-native";
-import { RootStackParamList } from "../navigators/RootStackNavigator";
+import { RootStackParamList } from "../navigators/rootStackNavigator";
 import KofaLogo from "../public/images/logoWalkSafe.png";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Kontakter">;
@@ -16,7 +15,7 @@ type Props = NativeStackScreenProps<RootStackParamList, "Kontakter">;
 const EndTimerScreen = ({ navigation }: Props) => {
   return (
     <View style={styles.root}>
-      <Image source={KofaLogo} style={styles.logo}></Image>
+      <Image source={KofaLogo} style={styles.logo}/>
       <View>
         <Text style={styles.title}>Tack för att du använder Walk Safe!</Text>
       </View>

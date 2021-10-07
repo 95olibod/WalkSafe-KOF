@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, StyleSheet, TextInput } from "react-native";
 import { ContactItem } from "../context/contactContext";
 
@@ -7,20 +7,21 @@ interface Props {
   filterContacts: (text: string) => void;
 }
 
+//Serach bar for contacts
 const SearchBar = ({ allContacts, filterContacts }: Props) => {
-  if (allContacts.length > 0) {
-    return (
-      <View>
+  return (
+    <View>
+      {allContacts.length > 0 ? (
         <TextInput
           placeholder="Sök"
-          placeholderTextColor = "#fff"
+          placeholderTextColor="#fff"
           textAlign="center"
           style={styles.searchBar}
           onChangeText={(text) => filterContacts(text)}
         />
-      </View>
-    );
-  } else return <View></View>;
+      ) : null}
+    </View>
+  );
 };
 export default SearchBar;
 
@@ -32,6 +33,6 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     marginTop: 8,
     marginBottom: 10,
-    color: "#fff"
+    color: "#fff",
   },
 });

@@ -3,11 +3,12 @@ import { StyleSheet, View, Text } from "react-native";
 import NumericInput from "react-native-numeric-input";
 
 interface Props {
-  updateMinutes: (minutes :number) => void;
-  updateHours: (hours :number) => void;
+  updateMinutes: (minutes: number) => void;
+  updateHours: (hours: number) => void;
 }
 
-function TimerInput({updateMinutes, updateHours}: Props) {
+//User sets timer start value 
+const TimerInput = ({ updateMinutes, updateHours }: Props) => {
   return (
     <View style={styles.root}>
       <View style={styles.timerInput}>
@@ -31,7 +32,7 @@ function TimerInput({updateMinutes, updateHours}: Props) {
             textColor="white"
           />
         </View>
-      </View>    
+      </View>
     </View>
   );
 }
@@ -39,28 +40,19 @@ function TimerInput({updateMinutes, updateHours}: Props) {
 export default TimerInput;
 
 const styles = StyleSheet.create({
-    root: {
-        alignItems: "center",
-    
-    },
+  root: {
+    alignItems: "center",
+  },
   timerInput: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    // width: "100%",
-    // backgroundColor: "white",
     color: "white",
   },
-
   text: {
-    color: "white",
-  },
-  minutes: {
     color: "white",
   },
   box: {
     margin: 20,
-    // marginBottom: 20
   },
-  
 });

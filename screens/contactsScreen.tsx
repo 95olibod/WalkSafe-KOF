@@ -1,28 +1,26 @@
-import * as Contacts from "expo-contacts";
-import React, { useState } from "react";
+import React from "react";
 import {
-  Button,
   StyleSheet,
   Image,
   Text,
   TouchableHighlight,
   View,
 } from "react-native";
-import { ContactItem, useContacts } from "../context/contactContext";
+import { useContacts } from "../context/contactContext";
 import ContactCard from "../components/contactCard";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../navigators/RootStackNavigator";
+import { RootStackParamList } from "../navigators/rootStackNavigator";
 import KofaLogo from "../public/images/logoWalkSafe.png";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Kontakter">;
 
-const ContactsPage = ({ navigation }: Props) => {
+//Renders contactscreen. Displays contactbook
+const ContactsScreen = ({ navigation }: Props) => {
   const { favouriteContacts } = useContacts();
 
   return (
     <View style={styles.root}>
-      <Image source={KofaLogo} style={styles.logo}></Image>
-
+      <Image source={KofaLogo} style={styles.logo} />
       <ContactCard />
       {favouriteContacts.length > 0 ? (
         <TouchableHighlight
@@ -35,29 +33,13 @@ const ContactsPage = ({ navigation }: Props) => {
     </View>
   );
 };
+export default ContactsScreen;
 
 const styles = StyleSheet.create({
   root: {
     marginRight: 30,
     marginLeft: 30,
     height: "100%",
-  },
-  sectionHeader: {
-    paddingTop: 2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 2,
-    fontSize: 14,
-    fontWeight: "bold",
-    backgroundColor: "rgba(247,247,247,1.0)",
-  },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-  },
-  title: {
-    fontSize: 32,
   },
   button: {
     backgroundColor: "rgba(45, 155, 240, 0.4)",
@@ -78,5 +60,3 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
   },
 });
-
-export default ContactsPage;

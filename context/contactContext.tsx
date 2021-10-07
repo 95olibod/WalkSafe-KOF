@@ -18,6 +18,7 @@ const ContactsProvider: FC = ({ children }) => {
   
   //Define state
   const [favouriteContacts, dispatch] = useReducer(contactReducer, []);
+
   return (
     <ContactContext.Provider
       value={{

@@ -5,15 +5,11 @@ import React, { createContext, FC, useEffect, useState } from "react";
 
 interface ContextValue {
     batteryLevel: number;
-
     locationLongitude: number;
     locationLatitude: number;
-
     deviceName: string | undefined;
     deviceModel: string | undefined;
-
     timerInput: number;
-
     setTimerInputFromUser: (minutes: number) => void;
 }
 
@@ -38,7 +34,7 @@ const DeviceProvider: FC = ({ children }) => {
 
     const [timerInput, setTimerInput] = useState<number>(0);
 
-    // BATTERY
+    // Gets batterylevel from phone 
     useEffect(() => {
         const batteryLevelOnMobile = async () => {
             const batteryTime = await Battery.getBatteryLevelAsync();
@@ -47,7 +43,7 @@ const DeviceProvider: FC = ({ children }) => {
         batteryLevelOnMobile();
     }, []);
 
-    // LOCATION
+    // Gets location longitude / latitude from device
     useEffect(() => {
         (async () => {
             let { status } = await Location.requestForegroundPermissionsAsync();
@@ -65,7 +61,7 @@ const DeviceProvider: FC = ({ children }) => {
         })();
     }, []);
 
-    // DEVICE INFO, NAME & MODEL
+    // Gets name and model from phone
     useEffect(() => {
         (async () => {
             let nameOfDevice = await Device.deviceName;
@@ -81,7 +77,7 @@ const DeviceProvider: FC = ({ children }) => {
         })();
     }, []);
 
-    // TIMER INPUT
+    // Gets timerinput from input field
     const setTimerInputFromUser = (minutes: number) => {
         setTimerInput(minutes);
     };

@@ -10,19 +10,24 @@ import { Timer } from "react-native-stopwatch-timer";
 import { DeviceContext } from "../context/deviceContext";
 
 interface Props {
-  // onStart?: () => void; REMOVE?
   handleTimerFinished: () => void;
   onStop: () => void;
 }
 
 const CountdownTimer = ({ onStop, handleTimerFinished }: Props) => {
         
-  const { timerInput } = useContext(DeviceContext);
-  const [isTimerStart, setIsTimerStart] = useState(false);
-        
-  const timerDuration = timerInput * 1000;
+  // get props from context 
 
+  const { timerInput } = useContext(DeviceContext);
+
+  // Hooks that holds state for if the timer is running & resets timers minutes
+
+  const [isTimerStart, setIsTimerStart] = useState(false);
   const [resetTimer, setResetTimer] = useState(false);
+  
+  // Set timerinput to minutes
+
+  const timerDuration = timerInput * 1000;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -80,29 +85,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  title: {
-    textAlign: "center",
-    fontSize: 20,
-    fontWeight: "bold",
-    padding: 20,
-  },
-  sectionStyle: {
-    flex: 1,
-    alignItems: "center",
-  },
   pauseButton: {
     color: "#FFFF",
     backgroundColor: "rgba(45, 155, 240, 0.4)",
     padding: 5,
     marginTop: 20,
     borderRadius: 10,
-  },
-  StopText: {
-    fontSize: 38,
-    color: "#FFF",
-  },
-  marginTop: {
-    marginTop: 90,
   },
   pauseButtonText: {
     color: "#FFF",
