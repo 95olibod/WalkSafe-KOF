@@ -11,11 +11,13 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../navigators/rootStackNavigator";
 import TimerInput from "../components/timerInput";
 import KofaLogo from "../public/images/logoWalkSafe.png";
+import { InformationContext } from "../context/informationContext";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Kontakter">;
 
-function HomeScreen({ navigation }: Props) {
+const HomeScreen = ({ navigation }: Props) => {
   const { setTimerInputFromUser } = useContext(DeviceContext);
+  const { clearPersonalMessage } = useContext(InformationContext);
 
   const [minutes, setMinutes] = useState(0);
   const [hours, setHours] = useState(0);
@@ -33,8 +35,12 @@ function HomeScreen({ navigation }: Props) {
 
   const handlePress = () => {
     if (totalMinutes >= 1) {
-      setTimerInputFromUser(totalMinutes * 60);
+      setTimerInputFromUser(totalMinutes);
+      // setTimerInputFromUser(totalMinutes * 60);
       navigation.navigate("Kontakter");
+
+      //Clear personal message
+      clearPersonalMessage();
     }
   };
 
@@ -101,7 +107,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "#fff",
-    fontSize: 18,
+    fontSize: 17,
     marginBottom: 8
   }
 });

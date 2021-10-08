@@ -24,7 +24,6 @@ function TimerScreen({ navigation }: Props) {
     includeLocation,
     includeBattery,
     personalMessage,
-    addPersonalMessage,
     schedulePushNotification,
   } = useContext(InformationContext);
 
@@ -65,7 +64,6 @@ function TimerScreen({ navigation }: Props) {
         navigation.navigate("Hem");
       }, 500);
     }
-    addPersonalMessage("");
   }
 
   return (

@@ -1,11 +1,8 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import {
-  View,
-  StyleSheet,
-  Image,
-  Text,
-  TouchableHighlight,
+  Image, StyleSheet, Text,
+  TouchableHighlight, View
 } from "react-native";
 import { RootStackParamList } from "../navigators/rootStackNavigator";
 import KofaLogo from "../public/images/logoWalkSafe.png";

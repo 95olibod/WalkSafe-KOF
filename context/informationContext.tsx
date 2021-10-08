@@ -11,19 +11,21 @@ import Constants from "expo-constants";
 import { Platform } from "react-native";
 
 interface ContextValue {
-  personalMessage: string;
-  toggleLocationSwitch: () => void;
-  toggleBatterySwitch: () => void;
-  addPersonalMessage: (text: string) => void;
-  includeLocation: boolean;
-  includeBattery: boolean;
-  schedulePushNotification: () => void;
+    personalMessage: string;
+    toggleLocationSwitch: () => void;
+    toggleBatterySwitch: () => void;
+    addPersonalMessage: (text: string) => void;
+    clearPersonalMessage: () => void;
+    includeLocation: boolean;
+    includeBattery: boolean;
+    schedulePushNotification: () => void;
 }
 
 export const InformationContext = createContext<ContextValue>({
   toggleLocationSwitch: () => {},
   toggleBatterySwitch: () => {},
   addPersonalMessage: () => {},
+  clearPersonalMessage: () => {},
   personalMessage: "",
   includeLocation: false,
   includeBattery: false,
@@ -58,6 +60,9 @@ const InformationProvider: FC = ({ children }) => {
   //Personal message for SMS
   const addPersonalMessage = (text: string) => {
     setPersonalMessage(text);
+  };
+  const clearPersonalMessage = () => {
+    setPersonalMessage("");
   };
 
   useEffect(() => {
@@ -130,6 +135,7 @@ const InformationProvider: FC = ({ children }) => {
         toggleLocationSwitch,
         toggleBatterySwitch,
         addPersonalMessage,
+        clearPersonalMessage,
         schedulePushNotification,
         personalMessage,
         includeBattery,
