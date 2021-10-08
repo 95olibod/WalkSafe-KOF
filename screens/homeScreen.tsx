@@ -42,6 +42,8 @@ function HomeScreen({ navigation }: Props) {
     <View style={styles.root}>
       <View style={styles.viewContainer}>
         <Image source={KofaLogo} style={styles.logo}/>
+        <Text style={styles.title}>Ange maximal tid för din säkra promenad</Text>
+
 
         {totalMinutes < 1 ? (
           <Text style={styles.validationText}>
@@ -54,8 +56,8 @@ function HomeScreen({ navigation }: Props) {
       <View>
         {totalMinutes > 0 ? (
           <TouchableHighlight
-            style={[styles.button]}
-            onPress={() => handlePress()}
+          style={[styles.button]}
+          onPress={() => handlePress()}
           >
             <Text style={[styles.buttonText]}>Gå vidare</Text>
           </TouchableHighlight>
@@ -97,6 +99,11 @@ const styles = StyleSheet.create({
     height: 150,
     alignSelf: "center",
   },
+  title: {
+    color: "#fff",
+    fontSize: 18,
+    marginBottom: 8
+  }
 });
 
 export default HomeScreen;
