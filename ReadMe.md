@@ -49,6 +49,7 @@ OBS! För att notiser ska fungera i EXPO, måste du logga in på ditt EXPO-konto
 ### Externa moduler:
 [react-native-stopwatch-timer](https://snack.expo.dev/@aboutreact/stopwatch-and-timer?session_id=snack-session-y4eB29bZK),
 [Formik](https://formik.org/docs/overview)
+[Navigation](https://reactnative.dev/docs/navigation)
 
 Annat externt:
 [Yup](https://www.npmjs.com/package/yup)
